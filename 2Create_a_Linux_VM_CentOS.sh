@@ -4,13 +4,13 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-manage-vm
 
 ## Create resource group
-az group create --name myResourceGroupVM --location southeastasia
+az group create --name testcentosrg --location southeastasia
 
 ## Create virtual machine
 az vm create \
-    --resource-group myResourceGroupVM \
-    --name myRedHatVM \
-    --image RHEL \
+    --resource-group testcentosrg \
+    --name myCentOSVM \
+    --image OpenLogic:CentOS-LVM:7-LVM:7.7.2020042700 \
     --admin-username azureuser \
     --generate-ssh-keys
 
