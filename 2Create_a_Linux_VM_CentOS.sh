@@ -9,8 +9,9 @@ az group create --name testcentosrg --location southeastasia
 ## Create virtual machine
 az vm create \
     --resource-group testcentosrg \
-    --name myCentOSVM \
+    --name myCentOSVM2 \
     --image OpenLogic:CentOS-LVM:7-LVM:7.7.2020042700 \
+    --size standard_d16as_v4 \
     --admin-username azureuser \
     --generate-ssh-keys
 
