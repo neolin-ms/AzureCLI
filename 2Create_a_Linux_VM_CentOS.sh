@@ -3,29 +3,29 @@
 ## Tutorial: Create and Manage Linux VMs with the Azure CLI
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-manage-vm
 
-## Create resource group
-az group create --name testcentosrg --location southeastasia
+# Create resource group
+az group create --name testCentOSRg --location southeastasia
 
-## Create virtual machine
+# Create virtual machine
 az vm create \
-    --resource-group testcentosrg \
-    --name myCentOSVM2 \
+    --resource-group testCentOSRg \
+    --name myCentOSVM \
     --image OpenLogic:CentOS-LVM:7-LVM:7.7.2020042700 \
     --size standard_d16as_v4 \
     --admin-username azureuser \
     --generate-ssh-keys
 
-## Connect to VM
+# Connect to VM
 #ssh azureuser@52.174.34.95
 
-## Stop virtual machine
-#az vm stop --resource-group myResourceGroupVM --name myVM
+# Stop virtual machine
+#az vm stop --resource-group testCentOSRg --name myVM
 
-## Start virtual machine
-#az vm start --resource-group myResourceGroupVM --name myVM
+# Start virtual machine
+#az vm start --resource-group testCentOSRg --name myVM
 
 # Show the ResourceGroup
 #az group --output table 
 
 # Delete resource group
-#az group delete --name myResourceGroupVM --no-wait --yes
+#az group delete --name testCentOSRg --no-wait --yes
