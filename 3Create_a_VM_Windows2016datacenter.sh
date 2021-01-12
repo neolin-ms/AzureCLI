@@ -17,14 +17,14 @@ az vm create \
 # Stop virtual machine
 #az vm stop --resource-group testWindowsRg --name myWindows2016VM 
 
-## Start virtual machine
+# Start virtual machine
 #az vm start --resource-group testWindowsRg --name myWindows2016VM
 
 # Show the ResourceGroup
 #az group --output table 
 
-## PowerShell, Connect to virtual machine via RDP
-mstsc /v:publicIpAddress
+# PowerShell, Connect to virtual machine via RDP
+#mstsc /v:publicIpAddress
 
 # Clean up resources
 #az group delete --name testWindowsRg --no-wait --yes
