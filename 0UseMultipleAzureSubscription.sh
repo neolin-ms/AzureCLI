@@ -1,6 +1,7 @@
 #!/bin/bash
 ## Use multiple Azure subscriptions
 ## https://docs.microsoft.com/en-us/cli/azure/manage-azure-subscriptions-azure-cli?view=azure-cli-latest
+## Azure CLI - az account
 ## https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest
 ## Sign in to Azure with the Azure CLI 
 ## https://docs.microsoft.com/zh-tw/cli/azure/install-azure-cli-linux?pivots=apt#sign-in-to-azure-with-the-azure-cli
