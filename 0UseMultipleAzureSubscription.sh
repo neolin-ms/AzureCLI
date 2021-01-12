@@ -2,6 +2,11 @@
 ## Use multiple Azure subscriptions
 ## https://docs.microsoft.com/en-us/cli/azure/manage-azure-subscriptions-azure-cli?view=azure-cli-latest
 ## https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest
+## Sign in to Azure with the Azure CLI 
+## https://docs.microsoft.com/zh-tw/cli/azure/install-azure-cli-linux?pivots=apt#sign-in-to-azure-with-the-azure-cli
+
+# Run the login command to sign in.
+az login
 
 ## Change the active subscription
 # Get a list of your subscriptions with the az account list command:
@@ -14,3 +19,6 @@ az account set --subscription "hslin - Microsoft Azure Internal Consumption"
 
 # Get the details of a subscription current.
 az account show
+
+# Run the logout command to sign out.
+az logout
