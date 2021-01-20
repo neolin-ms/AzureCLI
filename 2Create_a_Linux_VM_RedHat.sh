@@ -2,6 +2,7 @@
 
 ## Tutorial: Create and Manage Linux VMs with the Azure CLI
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-manage-vm
+## Find Linux VM images in the Azure Marketplace with the AzureCLI                                                                                                                                        ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage 
 
 # Create resource group
 az group create --name testRedHatRg --location southeastasia
@@ -25,6 +26,9 @@ az vm create \
 
 # Show the ResourceGroup
 #az group --output table 
+
+# Get IP address
+az vm list-ip-addresses --resource-group testredhatrg --name myRedHatVM --output table
 
 # Delete resource group
 #az group delete --name testRedHatRg --no-wait --yes
