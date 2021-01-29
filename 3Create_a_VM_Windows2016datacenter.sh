@@ -7,7 +7,7 @@ az group create --name testWindowsRg --location eastus
 # Create a Virtual machine
 az vm create \
     --resource-group testWindowsRg \
-    --name myWindows2016VM \
+    --name myWin2016VM4 \
     --image win2016datacenter \
     --admin-username azureuser
 
