@@ -10,8 +10,8 @@ az group create --name testRedHatRg --location southeastasia
 # Create virtual machine
 az vm create \
     --resource-group testRedHatRg \
-    --name myRedHatVM \
-    --image RHEL \
+    --name myRedHatVM3 \
+    --image RedHat:RHEL:7.6:7.6.2020080921 \
     --admin-username azureuser \
     --generate-ssh-keys
 
