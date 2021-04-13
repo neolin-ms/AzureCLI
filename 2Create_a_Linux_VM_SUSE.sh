@@ -10,7 +10,7 @@ az group create --name testSUSERg --location eastasia
 az vm create \
     --resource-group testSUSERg \
     --name mySUSEVM \
-    --image SUSE:sles-15-sp2:gen1:2020.12.10 \
+    --image SUSE:sles-15-sp2:gen2:2021.03.03 \
     --size standard_d2s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
@@ -32,3 +32,6 @@ az vm create \
 
 # Delete resource group
 #az group delete --name testCentOSRg --no-wait --yes
+    
+# Example for image version 
+## --image SUSE:sles-15-sp2:gen1:2020.12.10 \

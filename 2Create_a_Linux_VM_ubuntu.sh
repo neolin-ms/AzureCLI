@@ -11,7 +11,7 @@ az group create --name testUbuntuRg --location eastus
 az vm create \
     --resource-group testUbuntuRg \
     --name myUbuntuVM \
-    --image UbuntuLTS \
+    --image Canonical:UbuntuServer:16.04-LTS:16.04.202103160 \
     --admin-username azureuser \
     --generate-ssh-keys
 
