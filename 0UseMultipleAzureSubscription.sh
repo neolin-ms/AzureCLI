@@ -21,5 +21,5 @@ az account set --subscription "hslin - Microsoft Azure Internal Consumption"
 # Get the details of a subscription current.
 az account show
 
-# Run the logout command to sign out.
+# Log out to remove access to Azure subscriptions.
 az logout
