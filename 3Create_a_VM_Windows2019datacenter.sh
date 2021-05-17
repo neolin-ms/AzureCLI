@@ -23,6 +23,9 @@ az vm create \
 # Show the ResourceGroup
 #az group --output table 
 
+# Check the VM status and Get public IP address
+#az vm list -d -o table
+
 # PowerShell, Connect to virtual machine via RDP
 #mstsc /v:publicIpAddress
 
