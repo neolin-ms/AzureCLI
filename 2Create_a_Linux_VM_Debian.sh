@@ -13,10 +13,11 @@ az vm create \
     --resource-group testDebianRg \
     --name myDebianVM \
     --image credativ:Debian:9:9.20190221.0 \
-#    --image Publisher:Offer:Sku:Version \
     --size standard_f4s_v2 \
     --admin-username azureuser \
     --generate-ssh-keys
+
+#    --image Publisher:Offer:Sku:Version \
 
 # Connect to VM
 #ssh azureuser@52.174.34.95

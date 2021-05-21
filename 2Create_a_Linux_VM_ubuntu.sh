@@ -11,9 +11,13 @@ az group create --name testUbuntuRg --location eastus
 az vm create \
     --resource-group testUbuntuRg \
     --name myUbuntuVM \
-    --image Canonical:UbuntuServer:16.04-LTS:16.04.202103160 \
+    --image Canonical:UbuntuServer:18.04-LTS:18.04.202103250 \
     --admin-username azureuser \
     --generate-ssh-keys
+
+## Image example
+#Canonical|UbuntuServer|18.04-LTS|18.04.202103250
+#--image Canonical:UbuntuServer:16.04-LTS:16.04.202103160 \
 
 # Connect to VM
 #ssh azureuser@52.174.34.95
