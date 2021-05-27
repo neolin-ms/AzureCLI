@@ -17,6 +17,11 @@ az vm create \
     --admin-username azureuser \
     --generate-ssh-keys
 
+# Image version example
+#--image OpenLogic:CentOS:7.5:7.5.201808150 \
+#--image OpenLogic:CentOS:8_2:8.2.2020111800 \ 
+#--image OpenLogic:CentOS:8.0:8.0.201912060 \ 
+
 # Connect to VM
 #ssh azureuser@52.174.34.95
 

@@ -11,9 +11,13 @@ az group create --name testRedHatRg --location southeastasia
 az vm create \
     --resource-group testRedHatRg \
     --name myRedHatVM76 \
-    --image RedHat:RHEL:7.6:7.6.2021051101 \
+    --image RedHat:RHEL:8.2:8.2.2021040911 \
     --admin-username azureuser \
     --generate-ssh-keys
+
+# Image version
+#--image RedHat:RHEL:8.2:8.2.2021040911 \
+#--image RedHat:RHEL:7.6:7.6.2021051101 \
 
 # Connect to VM
 #ssh azureuser@52.174.34.95
