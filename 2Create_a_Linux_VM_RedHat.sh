@@ -5,12 +5,12 @@
 ## Find Linux VM images in the Azure Marketplace with the AzureCLI                                                                                                                                        ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage 
 
 # Create resource group
-az group create --name testRedHatRg --location southeastasia
+az group create --name testRedHatRgjpwest --location japanwest
 
 # Create virtual machine
 az vm create \
     --resource-group testRedHatRg \
-    --name myRedHatVM76 \
+    --name myRedHatVM82jpwest \
     --image RedHat:RHEL:8.2:8.2.2021040911 \
     --admin-username azureuser \
     --generate-ssh-keys
