@@ -11,13 +11,17 @@ az group create --name testDebianRg --location eastasia
 # Create virtual machine
 az vm create \
     --resource-group testDebianRg \
-    --name myDebianVM \
+    --name myDebianVM92 \
     --image credativ:Debian:9:9.20190221.0 \
-    --size standard_f4s_v2 \
+    --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
 
-#    --image Publisher:Offer:Sku:Version \
+#Image version example
+#--image Publisher:Offer:Sku:Version \
+
+#VM size example
+#--size Standard_D4s_v3 \
 
 # Connect to VM
 #ssh azureuser@52.174.34.95

@@ -2,14 +2,21 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-cli
 
 # Create resource group
-az group create --name testWindowsRg --location eastus
+az group create --name testWindowsRg --location eastasia
 
 # Create a Virtual machine
 az vm create \
     --resource-group testWindowsRg \
-    --name myWin2016VM4 \
+    --name myWin2016VM \
     --image win2016datacenter \
+    --size Standard_D4s_v3 \
     --admin-username azureuser
+
+# Image version example    
+#--image win2016datacenter \
+
+# VM size example
+#--size Standard_D4s_v3 \
 
 # Open port 80 for web trffic 
 #az vm open-port --port 80 --resource-group myResourceGroup --name myVM

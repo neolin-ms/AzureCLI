@@ -9,11 +9,17 @@ az group create --name testSUSERg --location eastasia
 # Create virtual machine
 az vm create \
     --resource-group testSUSERg \
-    --name mySUSEVM \
+    --name mySUSEVM15sp2 \
     --image SUSE:sles-15-sp2:gen2:2021.03.03 \
-    --size standard_d2s_v3 \
+    --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
+
+# Image version example
+#--image SUSE:sles-15-sp2:gen2:2021.03.03 \
+
+# VM size example
+#--size Standard_D4s_v3 \
 
 # Connect to VM
 #ssh azureuser@52.174.34.95

@@ -5,19 +5,23 @@
 ## Find Linux VM images in the Azure Marketplace with the AzureCLI                                                                                                                                        ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage 
 
 # Create resource group
-az group create --name testUbuntuRg --location eastus
+az group create --name testUbuntuRg --location eastusasia
 
 # Create virtual machine
 az vm create \
     --resource-group testUbuntuRg \
-    --name myUbuntuVM \
+    --name myUbuntuVM1804 \
     --image Canonical:UbuntuServer:18.04-LTS:18.04.202103250 \
+    --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
 
 ## Image example
 #Canonical|UbuntuServer|18.04-LTS|18.04.202103250
 #--image Canonical:UbuntuServer:16.04-LTS:16.04.202103160 \
+
+# VM size example
+#--size Standard_D4s_v3 \
 
 # Connect to VM
 #ssh azureuser@52.174.34.95
