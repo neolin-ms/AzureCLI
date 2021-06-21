@@ -5,7 +5,7 @@
 ## Find Linux VM images in the Azure Marketplace with the AzureCLI                                                                                                                                        ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage 
 
 # Create resource group
-az group create --name testUbuntuRg --location eastusasia
+az group create --name testUbuntuRg --location eastasia
 
 # Create virtual machine
 az vm create \
