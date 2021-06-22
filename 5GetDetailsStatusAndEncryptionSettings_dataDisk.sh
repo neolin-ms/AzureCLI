@@ -3,9 +3,8 @@
 RGNAME="testWindowsRg"
 VMNAME="myWin2019VM0622"
 
-disk=`az vm show -g ${RGNAME} -n ${VMNAME} --query storageProfile.osDisk.name -o tsv`
-for disk in $disk; do \
-echo "============================================================================================================================================================="
+for disk in `az vm show -g ${RGNAME} -n ${VMNAME} --query storageProfile.dataDisks[].name -o tsv`; do \
+echo "============================================================================================================================================================="; \
 echo -ne "Disk Name: "; az disk show -g ${RGNAME} -n ${disk} --query name -o tsv; \
 echo -ne "Encryption Enabled: "; az disk show -g ${RGNAME} -n ${disk} --query encryptionSettingsCollection.enabled -o tsv; \
 echo -ne "Version: "; az disk show -g ${RGNAME} -n ${disk} --query encryptionSettingsCollection.encryptionSettingsVersion -o tsv; \
