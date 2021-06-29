@@ -4,12 +4,12 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-manage-vm
 
 # Create resource group
-az group create --name testSUSERg --location eastasia 
+az group create --name testSUSERg --location westus2 
 
 # Create virtual machine
 az vm create \
     --resource-group testSUSERg \
-    --name mySUSEVM15sp2 \
+    --name mySUSEVM15sp2westus2 \
     --image SUSE:sles-15-sp2:gen2:2021.03.03 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
