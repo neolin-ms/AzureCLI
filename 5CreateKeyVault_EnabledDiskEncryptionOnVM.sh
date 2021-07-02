@@ -20,9 +20,9 @@ KVRGNAME="testKvRg"
 KVNAME="testmyKv06222021"
 KEYNAME="testmykey0622"
 
-az group create --name ${KVRGNAME} --location eastasia
+az group create --name ${KVRGNAME} --location ${LOCATION}
 
-az keyvault create --name ${KVNAME} --resource-group ${KNRGNAME} --location eastasia --enabled-for-disk-encryption
+az keyvault create --name ${KVNAME} --resource-group ${KVRGNAME} --location ${LOCATION} --enabled-for-disk-encryption
 	
 az keyvault show -n ${KVNAME} --query id -o tsv
 /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testKvRg/providers/Microsoft.KeyVault/vaults/testmyKv06222021
