@@ -17,8 +17,8 @@ az vm create \
 //==Create KV and KEK
 
 KVRGNAME="testKvRg"
-KVNAME="testmyKv06222021"
-KEYNAME="testmykey0622"
+KVNAME="testmyKv20210702"
+KEYNAME="testmykey20210702"
 
 az group create --name ${KVRGNAME} --location ${LOCATION}
 
