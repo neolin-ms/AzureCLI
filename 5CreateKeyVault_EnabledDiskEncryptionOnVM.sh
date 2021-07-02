@@ -2,11 +2,15 @@
 
 //==Create VM
 
-az group create --name testWindowsRg --location eastasia
+LOCATION="eastasia"
+RGNAME="testWindowsRg"
+VMNAME="myWin2019vm0622"
+
+az group create --name ${RGNAME} --location ${LOCATION} 
 
 az vm create \
-    --resource-group testWindowsRg \
-    --name myWin2019VM0622 \
+    --resource-group ${RGNAME} \
+    --name ${VMNAME} \
     --image win2019datacenter \
     --admin-username azureuser
 
