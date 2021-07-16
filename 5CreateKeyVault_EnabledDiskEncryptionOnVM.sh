@@ -34,14 +34,12 @@ https://testmykv06222021.vault.azure.net/keys/testmykey0622/xxxxxxxxxxxxxxxx
 
 //==Show Disk Encryption Status
 
-RGNAME="testWindowsRg"
-VMNAME="myWin2019VM0622"
-
 az vm encryption show --name ${VMNAME} --resource-group ${RGNAME} --query "status" -o table
 
 az vm encryption show -g ${RGNAME} -n ${VMNAME} --query "disks[*].[name, statuses[*].displayStatus]" -o table
 
 osDisk=`az vm show -d -g ${RGNAME} -n ${VMNAME} --query "storageProfile.osDisk.name" -o tsv`
+echo $osDisk
 myVMWindows2019_disk1_xxxxxxxx
 
 az vm show -d -g ${RGNAME} -n ${VMNAME} --query "storageProfile.dataDisks[].name" -o tsv
@@ -50,7 +48,6 @@ dataDisk1
 
 //==Show Disk Encryption Info
 
-osDisk="myVMWindows2019_disk1_xxxxxxxx"
 dataDisk0="dataDisk0"
 dataDisk1="dataDisk1"
 
@@ -76,6 +73,10 @@ KVFULLSTRING="/subscriptions/xxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/tes
 KEKURI="https://testmykv06222021.vault.azure.net/keys/testmykey0622/xxxxxxxxx"
 
 az vm encryption enable --resource-group ${RGNAME} --name ${VMNAME} --disk-encryption-keyvault ${KVFULLSTRING} --key-encryption-key ${KEKURI} --key-encryption-keyvault ${KVFULLSTRING} --volume-type [All|OS|Data]
+
+az vm encryption enable --resource-group ${RGNAME} --name ${VMNAME} --disk-encryption-keyvault ${KVFULLSTRING} --key-encryption-key ${KEKURI} --key-encryption-keyvault ${KVFULLSTRING} --volume-type All
+
+az vm encryption enable --resource-group ${RGNAME} --name ${VMNAME} --disk-encryption-keyvault ${KVFULLSTRING} --key-encryption-key ${KEKURI} --key-encryption-keyvault ${KVFULLSTRING} --volume-type OS
 
 az vm encryption enable --resource-group ${RGNAME} --name ${VMNAME} --disk-encryption-keyvault ${KVFULLSTRING} --key-encryption-key ${KEKURI} --key-encryption-keyvault ${KVFULLSTRING} --volume-type Data
 
