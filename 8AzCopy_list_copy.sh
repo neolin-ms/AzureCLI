@@ -27,6 +27,6 @@ azcopy copy 'C:\myDirectory' 'https://mystorageaccount.blob.core.windows.net/myc
 ==copy folder==
 azcopy copy 'https://mysourceaccount.blob.core.windows.net/mycontainer/myBlobDirectory?<SAS-Token>' 'https://mydestinationaccount.blob.core.windows.net/mycontainer' --recursive
 
-.\azcopy copy 'https://neowinsql0629.blob.core.windows.net/bootdiagnostics-neowindow-a59b7386-xxxx-xxxx-xxxxxxxxxxxx/2107160060001936?<SAS-Token>' 'https://testcopy0722.blob.core.windows.net/testcontainer0722/test' --recursive
+.\azcopy copy 'https://neowinsql0629.blob.core.windows.net/bootdiagnostics-neowindow-a59b7386-xxxx-xxxx-xxxxxxxxxxxx/210716006000xxxx?<SAS-Token>' 'https://testcopy0722.blob.core.windows.net/testcontainer0722/test' --recursive
 
-.\azcopy copy 'https://neowinsql0629.blob.core.windows.net/bootdiagnostics-neowindow-a59b7386-xxxx-xxxx-xxxx-xxxxxxxxxxxx/2107160060001936/*?<SAS-Token>' 'https://testcopy0722.blob.core.windows.net/testcontainer0722/test' --recursive
+.\azcopy copy 'https://neowinsql0629.blob.core.windows.net/bootdiagnostics-neowindow-a59b7386-xxxx-xxxx-xxxx-xxxxxxxxxxxx/210716006000xxxx/*?<SAS-Token>' 'https://testcopy0722.blob.core.windows.net/testcontainer0722/test' --recursive
