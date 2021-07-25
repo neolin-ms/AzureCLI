@@ -1,5 +1,9 @@
 
-==login==`
+==Verify role assignments==
+Storage Blob Data Contributor
+Storage Blob Data Owner
+
+==login==
 .\azcopy login --tenant-id=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 ==list==
