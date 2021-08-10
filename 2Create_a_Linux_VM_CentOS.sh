@@ -6,14 +6,14 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage
 
 # Create resource group
-az group create --name testCentOSRg --location eastasia 
+az group create --name testCentOSRg --location uaenorth 
 
 # Create virtual machine
 az vm create \
     --resource-group testCentOSRg \
-    --name myCentOSVM76 \
-    --image OpenLogic:CentOS:7.6:7.6.20190708 \
-    --size Standard_D4s_v3 \
+    --name myCentOS77vm0810dv4 \
+    --image OpenLogic:CentOS:7.7:7.7.2020111300 \
+    --size Standard_D8_v4 \
     --admin-username azureuser \
     --generate-ssh-keys
 
@@ -22,6 +22,8 @@ az vm create \
 #--image OpenLogic:CentOS:7.6:7.6.20190708 \
 #--image OpenLogic:CentOS:8_2:8.2.2020111800 \ 
 #--image OpenLogic:CentOS:8.0:8.0.201912060 \ 
+#--image OpenLogic:CentOS:7.7:latest \
+#--image OpenLogic:CentOS:7.7:7.7.2020111300 \
 
 # Connect to VM
 #ssh azureuser@52.174.34.95
