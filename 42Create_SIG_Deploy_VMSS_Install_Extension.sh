@@ -22,13 +22,13 @@ az sig image-version create \
    --gallery-image-definition myImageDefinition \
    --gallery-image-version 1.0.0 \
    --target-regions "eastasia=1" \
-   --managed-image "/subscriptions/a76944aa-b763-4bb1-85eb-ee3731eb8cec/resourceGroups/testUbuntuRg/providers/Microsoft.Compute/virtualMachines/myUbuntu1804vm0726"
+   --managed-image "/subscriptions/a76944aa-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testUbuntuRg/providers/Microsoft.Compute/virtualMachines/myUbuntu1804vm0726"
 
 #Create VMSS and deploy instance by use the image of SIG   
 az vmss create \
    --resource-group testUbuntuRg \
    --name myScaleSet \
-   --image "/subscriptions/a76944aa-b763-4bb1-85eb-ee3731eb8cec/resourceGroups/myGalleryRG/providers/Microsoft.Compute/galleries/myGallery/images/myImageDefinition" \
+   --image "/subscriptions/a76944aa-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myGalleryRG/providers/Microsoft.Compute/galleries/myGallery/images/myImageDefinition" \
    --specialized
    
 #Install the extension on instances of VMSS
