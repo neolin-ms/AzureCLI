@@ -56,7 +56,7 @@ az sig image-version create \
 
 # Create VMSS and deploy instance by use the image of SIG
 vmss_name=myScalSet
-vmss_image=
+vmss_image=<IMAGE_DEFINITION_URI>
 
 az vmss create \
    --resource-group ${rg_name} \
