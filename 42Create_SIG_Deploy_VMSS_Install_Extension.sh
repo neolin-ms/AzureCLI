@@ -51,7 +51,7 @@ az sig image-version create \
    --gallery-name ${sig_name} \
    --gallery-image-definition ${imagedefinition_name} \
    --gallery-image-version 1.0.0 \
-   --target-regions "japaneast=1" \
+   --target-regions ${region_name}=1 \
    --managed-image ${managed_image}
 
 # Create VMSS and deploy instance by use the image of SIG
