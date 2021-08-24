@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ## https://ifi.tech/2021/03/25/application-deployment-to-vmss-using-azure-devops/
+## https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-diagnostics-oms-agent 
 
-#Create Resource Group, Image and SIG
+# Create Resource Group, Image and SIG
 az group create --name myGalleryRG --location eastasia
 az sig create --resource-group myGalleryRG --gallery-name myGallery
 
@@ -24,14 +25,14 @@ az sig image-version create \
    --target-regions "eastasia=1" \
    --managed-image "/subscriptions/a76944aa-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testUbuntuRg/providers/Microsoft.Compute/virtualMachines/myUbuntu1804vm0726"
 
-#Create VMSS and deploy instance by use the image of SIG   
+# Create VMSS and deploy instance by use the image of SIG
 az vmss create \
    --resource-group testUbuntuRg \
    --name myScaleSet \
    --image "/subscriptions/a76944aa-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myGalleryRG/providers/Microsoft.Compute/galleries/myGallery/images/myImageDefinition" \
    --specialized
    
-#Install the Linux Diagnostic extension on instances of VMSS
+# Install the Linux Diagnostic extension on instances of VMSS
 az vm extension set --publisher Microsoft.Azure.Diagnostics --name LinuxDiagnostic --version 4.0 --resource-group testUbuntuRg --vm-name <vm_name> --protected-settings ProtectedSettings.json --settings PublicSettings.json   
 
 
