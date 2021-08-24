@@ -44,13 +44,14 @@ az sig image-definition create \
    --os-type ${os_type} \
    --os-state ${os_state}
 
-managed_image=
+managed_image=<VM_RESOURCE_URI>
+
 az sig image-version create \
    --resource-group ${rg_name} \
    --gallery-name ${sig_name} \
    --gallery-image-definition ${imagedefinition_name} \
    --gallery-image-version 1.0.0 \
-   --target-regions "eastasia=1" \
+   --target-regions "japaneast=1" \
    --managed-image ${managed_image}
 
 # Create VMSS and deploy instance by use the image of SIG
