@@ -1,35 +1,66 @@
 #!/bin/bash
 
+# References
 ## https://ifi.tech/2021/03/25/application-deployment-to-vmss-using-azure-devops/
 ## https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-diagnostics-oms-agent 
 
-# Create Resource Group, Image and SIG
-az group create --name myGalleryRG --location eastasia
-az sig create --resource-group myGalleryRG --gallery-name myGallery
+# Create Resource Group,and SIG
+region_name=JapanEast
+rg_name=testUbuntuRg
+sig_name=myGallery
+
+az group create --name ${rg_name} --location ${region_name}
+az sig create --resource-group ${rg_name} --gallery-name ${sig_name} 
+
+# Create Linux VM  
+vm_name=myUbuntu1804vm0824
+vm_image=Canonical:UbuntuServer:18.04-LTS:18.04.202107200
+vm_size=Standard_D4s_v3
+vm_username=azureuser
+
+az vm create \
+  --resource-group ${rg_name} \
+  --name ${vm_name} \
+  --image ${vm_image} \
+  --size ${vm_size} \
+  --admin-username ${vm_username} \
+  --generate-ssh-keys
+
+# Create dfinition for Linux, and image 
+imagedefinition_name=myImageDefinition
+publisher_name=myPublisher
+offer_name=myOffer
+sku_name=mySKU
+os_type=Linux
+os_state=specialized
 
 az sig image-definition create \
-   --resource-group myGalleryRG \
-   --gallery-name myGallery \
-   --gallery-image-definition myImageDefinition \
-   --publisher myPublisher \
-   --offer myOffer \
-   --sku mySKU \
-   --os-type Linux \
-   --os-state specialized
+   --resource-group ${rg_name} \
+   --gallery-name ${sig_name} \
+   --gallery-image-definition ${imagedefinition_name} \
+   --publisher ${publisher_name} \
+   --offer ${offer_name} \
+   --sku ${sku_name} \
+   --os-type ${os_type} \
+   --os-state ${os_state}
 
+managed_image=
 az sig image-version create \
-   --resource-group myGalleryRG \
-   --gallery-name myGallery \
-   --gallery-image-definition myImageDefinition \
+   --resource-group ${rg_name} \
+   --gallery-name ${sig_name} \
+   --gallery-image-definition ${imagedefinition_name} \
    --gallery-image-version 1.0.0 \
    --target-regions "eastasia=1" \
-   --managed-image "/subscriptions/a76944aa-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testUbuntuRg/providers/Microsoft.Compute/virtualMachines/myUbuntu1804vm0726"
+   --managed-image ${managed_image}
 
 # Create VMSS and deploy instance by use the image of SIG
+vmss_name=myScalSet
+vmss_image=
+
 az vmss create \
-   --resource-group testUbuntuRg \
-   --name myScaleSet \
-   --image "/subscriptions/a76944aa-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myGalleryRG/providers/Microsoft.Compute/galleries/myGallery/images/myImageDefinition" \
+   --resource-group ${rg_name} \
+   --name ${vmss_name} \
+   --image ${vmss_image} \
    --specialized
    
 # Install the Linux Diagnostic extension on instances of VMSS
@@ -56,15 +87,15 @@ az vmss extension set \
   --publisher Microsoft.Azure.Diagnostics \
   --name LinuxDiagnostic \
   --version 4.0 \
-  --resource-group $my_resource_group \
-  --vmss-name $my_linux_vmss \
+  --resource-group ${rg_name} \
+  --vmss-name ${vmss_name} \
   --protected-settings "${my_lad_protected_settings}" \
   --settings portal_public_settings.json
 
 ## Install the Log Analytics extension
 az vmss extension set \
-  --resource-group <nameOfResourceGroup> \
-  --vmss-name <nameOfNodeType> \
+  --resource-group ${rg_name} \
+  --vmss-name ${vmss_name} \
   --name OmsAgentForLinux \
   --publisher Microsoft.EnterpriseCloud.Monitoring \ 
   --settings "{'workspaceId':'<Log AnalyticsworkspaceId>'}" \
