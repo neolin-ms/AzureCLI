@@ -3,6 +3,7 @@
 ## References
 ## https://ifi.tech/2021/03/25/application-deployment-to-vmss-using-azure-devops/
 ## https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-diagnostics-oms-agent 
+## https://docs.microsoft.com/en-us/azure/azure-monitor/logs/quick-create-workspace-cli
 
 # 1. Create Resource Group,and SIG
 region_name=JapanEast
@@ -93,7 +94,12 @@ az vmss extension set \
   --protected-settings "${my_lad_protected_settings}" \
   --settings portal_public_settings.json
 
-# 6. Install the Log Analytics extension
+# 6. Create a Log Analytics workspace with AzureCLI 2.0
+deployment_name=myDeployment
+
+az deployment group create --resource-group ${rg_name} --name ${deployment_name} --template-file deploylaworkspacetemplate.json
+
+# 7. Install the Log Analytics extension
 az vmss extension set \
   --resource-group ${rg_name} \
   --vmss-name ${vmss_name} \
