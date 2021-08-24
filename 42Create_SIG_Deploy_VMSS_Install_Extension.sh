@@ -31,7 +31,7 @@ az vmss create \
    --image "/subscriptions/a76944aa-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myGalleryRG/providers/Microsoft.Compute/galleries/myGallery/images/myImageDefinition" \
    --specialized
    
-#Install the extension on instances of VMSS
+#Install the Linux Diagnostic extension on instances of VMSS
 az vm extension set --publisher Microsoft.Azure.Diagnostics --name LinuxDiagnostic --version 4.0 --resource-group testUbuntuRg --vm-name <vm_name> --protected-settings ProtectedSettings.json --settings PublicSettings.json   
 
 
@@ -53,3 +53,11 @@ my_lad_protected_settings="{'storageAccountName': '$my_diagnostic_storage_accoun
 
 az vmss extension set --publisher Microsoft.Azure.Diagnostics --name LinuxDiagnostic --version 4.0 --resource-group $my_resource_group --vmss-name $my_linux_vmss --protected-settings "${my_lad_protected_settings}" --settings portal_public_settings.json
 
+## Install the Log Analytics extension
+az vmss extension set \
+  --resource-group <nameOfResourceGroup> \
+  --vmss-name <nameOfNodeType> \
+  --name OmsAgentForLinux \
+  --publisher Microsoft.EnterpriseCloud.Monitoring \ 
+  --settings "{'workspaceId':'<Log AnalyticsworkspaceId>'}" \
+  --protected-settings "{'workspaceKey':'<Log AnalyticsworkspaceKey>'}"

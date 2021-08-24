@@ -11,8 +11,8 @@ az group create --name testCentOSRg --location uaenorth
 # Create virtual machine
 az vm create \
     --resource-group testCentOSRg \
-    --name myCentOS77vm0810dv4 \
-    --image OpenLogic:CentOS:7.7:7.7.2020111300 \
+    --name myCentOS76vm0813 \
+    --image OpenLogic:CentOS:7.6:7.6.201909120 \
     --size Standard_D8_v4 \
     --admin-username azureuser \
     --generate-ssh-keys
@@ -24,6 +24,7 @@ az vm create \
 #--image OpenLogic:CentOS:8.0:8.0.201912060 \ 
 #--image OpenLogic:CentOS:7.7:latest \
 #--image OpenLogic:CentOS:7.7:7.7.2020111300 \
+#--image OpenLogic:CentOS:7.6:7.6.201909120 \
 
 # Connect to VM
 #ssh azureuser@52.174.34.95
