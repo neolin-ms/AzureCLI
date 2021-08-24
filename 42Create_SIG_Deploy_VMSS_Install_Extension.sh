@@ -51,7 +51,14 @@ sed -i "s#__VM_RESOURCE_ID__#$my_vmss_resource_id#g" portal_public_settings.json
 my_diagnostic_storage_account_sastoken=$(az storage account generate-sas --account-name $my_diagnostic_storage_account --expiry 2037-12-31T23:59:00Z --permissions wlacu --resource-types co --services bt -o tsv)
 my_lad_protected_settings="{'storageAccountName': '$my_diagnostic_storage_account', 'storageAccountSasToken': '$my_diagnostic_storage_account_sastoken'}"
 
-az vmss extension set --publisher Microsoft.Azure.Diagnostics --name LinuxDiagnostic --version 4.0 --resource-group $my_resource_group --vmss-name $my_linux_vmss --protected-settings "${my_lad_protected_settings}" --settings portal_public_settings.json
+az vmss extension set \
+  --publisher Microsoft.Azure.Diagnostics \
+  --name LinuxDiagnostic \
+  --version 4.0 \
+  --resource-group $my_resource_group \
+  --vmss-name $my_linux_vmss \
+  --protected-settings "${my_lad_protected_settings}" \
+  --settings portal_public_settings.json
 
 ## Install the Log Analytics extension
 az vmss extension set \
