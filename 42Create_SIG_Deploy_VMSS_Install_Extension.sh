@@ -100,10 +100,13 @@ deployment_name=myDeployment
 az deployment group create --resource-group ${rg_name} --name ${deployment_name} --template-file deploylaworkspacetemplate.json
 
 # 7. Install the Log Analytics extension
+workspace_id=<LOG_ANALYTICS_WORKSPACE_ID>
+workspace_key=<LOG_ANALYTICS_WORKSPACE_Key>
+
 az vmss extension set \
   --resource-group ${rg_name} \
   --vmss-name ${vmss_name} \
   --name OmsAgentForLinux \
   --publisher Microsoft.EnterpriseCloud.Monitoring \ 
-  --settings "{'workspaceId':'<Log AnalyticsworkspaceId>'}" \
-  --protected-settings "{'workspaceKey':'<Log AnalyticsworkspaceKey>'}"
+  --settings "{'workspaceId':'${workspace_id}'}" \
+  --protected-settings "{'workspaceKey':'workspace_key'}"
