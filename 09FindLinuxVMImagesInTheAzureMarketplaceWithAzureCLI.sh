@@ -9,7 +9,7 @@ az vm image list --output table
 az vm image list --offer Debian --all --output table
 
 # Lists all Debian 8 SKUs in the West Eurpoe location
-az vm image list --location westeurope --offer Deb --publisher credativ --sku 8 --all --output table
+az vm image list --location westeurope --offer Debian --publisher credativ --sku 8 --all --output table
 
 # Navigate the images
 # Lists the image publishers in the West US location
