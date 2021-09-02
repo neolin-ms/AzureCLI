@@ -7,14 +7,14 @@ az group create --name testWindowsRg --location eastasia
 # Create a Virtual machine
 az vm create \
     --resource-group testWindowsRg \
-    --name myWin10vm0701 \
-    --image MicrosoftWindowsDesktop|Windows-10|20h2-pro|19042.928.2104091209 \
+    --name myWin10vm0827 \
+    --image MicrosoftWindowsDesktop:Windows-10:20h2-pro:19042.1165.2108010715 \
     --size Standard_D4s_v3 \
     --admin-username azureuser
 
 # Image version example    
-#--image win2016datacenter \
 #--image MicrosoftWindowsDesktop|Windows-10|20h2-pro|19042.928.2104091209
+#--image MicrosoftWindowsDesktop:Windows-10:20h2-pro:19042.1165.2108010715
 
 # VM size example
 #--size Standard_D4s_v3 \
