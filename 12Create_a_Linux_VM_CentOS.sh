@@ -6,7 +6,7 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage
 
 # Create resource group
-az group create --name testCentOSRg --location uaenorth 
+az group create --name testCentOSRg --location eastasia 
 
 # Create virtual machine
 az vm create \
