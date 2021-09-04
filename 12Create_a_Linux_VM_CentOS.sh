@@ -4,6 +4,11 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-manage-vm
 ## Find Linux VM images in the Azure Marketplace with the AzureCLI
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage
+## Sign in with Azure CLI
+## https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli
+
+# Sign in with Azure CLI
+#az login --use-device-code
 
 # Create resource group
 az group create --name testCentOSRg --location eastasia 
