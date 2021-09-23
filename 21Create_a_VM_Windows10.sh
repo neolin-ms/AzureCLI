@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## Quickstart: Create a Windows virtual machine with the Azure CLI
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-cli
 

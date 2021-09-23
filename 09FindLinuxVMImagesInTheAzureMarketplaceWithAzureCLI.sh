@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ## Find Linux VM images in the Azure Marketplace with the Azure CLI
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage
 

@@ -1,4 +1,6 @@
-me=testmyKv20210702
+#!/bin/bash
+
+keyvault_name=testmyKv20210702
 rg_name=testKvRg
 
 az keyvault certificate create \

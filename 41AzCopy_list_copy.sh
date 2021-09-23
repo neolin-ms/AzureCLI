@@ -1,3 +1,4 @@
+#!/bin/bash
 
 ==Verify role assignments==
 Storage Blob Data Contributor

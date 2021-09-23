@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ## Use multiple Azure subscriptions
 ## https://docs.microsoft.com/en-us/cli/azure/manage-azure-subscriptions-azure-cli?view=azure-cli-latest
 ## Azure CLI - az account

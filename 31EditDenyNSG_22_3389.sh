@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ## AzureCLI
 ## https://docs.microsoft.com/en-us/cli/azure/network/nsg?view=azure-cli-latest
