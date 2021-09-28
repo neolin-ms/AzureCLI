@@ -10,7 +10,7 @@ az group create --name testRedHatRg --location southeastasia
 # Create virtual machine
 az vm create \
     --resource-group testRedHatRg \
-    --name myRedHat82VM0915 \
+    --name myRedHat82VM0929 \
     --image RedHat:RHEL:8.2:8.2.2021040911 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
