@@ -52,6 +52,8 @@ az network public-ip prefix show --name ${ipprefix_name} --resource-group ${rg_n
 az network public-ip prefix show --name ${ipprefix_name} --resource-group ${rg_name} --subscription ${subscription_id} --query id
 
 # Add Public IP Prefix to VMSS Instances
+ipprefix_resource='<Public IP Prefix Resource ID>'
+
 az vmss update -n ${vmss_name} -g ${rg_name} --set virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.name='pub1' \
 virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.idleTimeoutInMinutes=15
 
