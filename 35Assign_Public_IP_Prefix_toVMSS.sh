@@ -52,12 +52,12 @@ az network public-ip prefix show --name ${ipprefix_name} --resource-group ${rg_n
 az network public-ip prefix show --name ${ipprefix_name} --resource-group ${rg_name} --subscription ${subscription_id} --query id
 
 # Add Public IP Prefix to VMSS Instances
-ipprefix_resource='<Public IP Prefix Resource ID>'
+ipprefix_resourceid='<Public IP Prefix Resource ID>'
 
 az vmss update -n ${vmss_name} -g ${rg_name} --set virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.name='pub1' \
 virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.idleTimeoutInMinutes=15
 
-az vmss update -n ${vmss_name} -g ${rg_name} --set virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.publicIpPrefix.id='/subscriptions/a76944aa-xxxx-xxxx-xxxx-ee3731eb8cec/resourcegroups/testubunturg/providers/Microsoft.Network/publicipprefixes/MyPublicIPPrefix' \
+az vmss update -n ${vmss_name} -g ${rg_name} --set virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.publicIpPrefix.id=${ipprefix_resourceid} \
 virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.publicIpPrefix.resourceGroup=${rg_name}
 
 # List public IP prefix resources
