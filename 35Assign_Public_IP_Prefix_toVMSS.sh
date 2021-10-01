@@ -7,9 +7,13 @@ region_name=eastasia
 ```
 
 ## Create a Load Balancer
+```bash
+lb_name=myScalSetlb
+```
 
 ## Deploy a virtual machine scale set with existing load balancer
 ```bash
+vmss_name=myScaleSet
 az vmss create \
     --resource-group <resource-group> \
     --name <vmss-name>\
@@ -33,24 +37,33 @@ az network public-ip prefix create --length 28 --location ${region_name} --name 
 
 ## List public IP prefix resources.
 ```bash
-az network public-ip prefix list -o tale
+az network public-ip prefix list -o table
 ```
 
 ## Get the details of a public IP prefix resource.
 ```bash
 subscription_id='<Subscription ID>'
 az network public-ip prefix show --name ${ipprefix_name} --resource-group ${rg_name} --subscription ${subscription_id} 
+az network public-ip prefix show --name ${ipprefix_name} --resource-group ${rg_name} --subscription ${subscription_id} --query id
 ```
 
 ## Add Public IP Prefix to VMSS Instances
 ```bash
 vmss_name=myScalSet1
-az vmss update -n ${vmss_name} -g ${rg_name} \
---set virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.name='PIP1' virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.idleTimeoutInMinutes=15
+
+az vmss update -n ${vmss_name} -g ${rg_name} --set virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.name='pub1' \
+virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.idleTimeoutInMinutes=15
+
+az vmss update -n ${vmss_name} -g ${rg_name} --set virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.publicIpPrefix.id='/subscriptions/a76944aa-xxxx-xxxx-xxxx-ee3731eb8cec/resourcegroups/testubunturg/providers/Microsoft.Network/publicipprefixes/MyPublicIPPrefix' \
+virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.publicIpPrefix.resourceGroup=${rg_name}
 ```
+
+## List public IP prefix resources
 ```bash
-az vmss update -n ${vmss_name} -g ${rg_name} \
---set virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.name='pub1' \
-virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.idleTimeoutInMinutes=15 \
-virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0].ipConfigurations[0].publicIpAddressConfiguration.PublicIpPrefix.id='/subscriptions/a76944aa-b763-4bb1-85eb-ee3731eb8cec/resourcegroups/testubunturg/providers/microsoft.network/publicipprefixes/mypublicipprefix'
+az network public-ip prefix list --resource-group ${rg_name} --subscription ${subscription_id} -o table
+```
+
+## List public IP addresses of VM instances within a set.
+```bash
+az vmss list-instance-public-ips --name ${vmss_name} --resource-group ${rg_name} -o table
 ```
