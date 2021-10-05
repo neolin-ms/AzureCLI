@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Reference
+## Quickstart: Create a public load balancer to load balance VMs using Azure CLI
+## https://docs.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-cli?tabs=option-1-create-load-balancer-standard
+## Quickstart: Create a virtual machine scale set with the Azure CLI
+## https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/quick-create-cli
+## az vmss
+## https://docs.microsoft.com/en-us/cli/azure/vmss?view=azure-cli-latest
+
 # Sign in with Azure CLI
 #az login --use-device-code
 
