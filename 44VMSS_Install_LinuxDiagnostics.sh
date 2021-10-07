@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#References
+##https://docs.microsoft.com/en-us/azure/azure-monitor/agents/diagnostics-extension-overview
+##https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az_storage_account_generate_sas 
+##https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/diagnostics-linux-v3?context=/azure/virtual-machines/context/context#install-the-extension-on-a-vm 
+
 # Login to Azure before you do anything else.
 az login
 
