@@ -1,9 +1,11 @@
 #!/bin/bash
 
 #References
+## https://docs.microsoft.com/en-us/cli/azure/vmss?view=azure-cli-latest#az_vmss_create
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/oms-linux
 ## https://docs.microsoft.com/en-us/cli/azure/vmss/extension?view=azure-cli-latest#az_vmss_extension_set
 ## https://docs.microsoft.com/en-us/cli/azure/monitor/log-analytics/workspace?view=azure-cli-latest#az_monitor_log_analytics_workspace_show
+## https://docs.microsoft.com/en-us/cli/azure/monitor/log-analytics/workspace?view=azure-cli-latest#az_monitor_log_analytics_workspace_get_shared_keys
 
 # Login to Azure before you do anything else.
 az login
@@ -54,7 +56,7 @@ az vmss extension set \
   --settings '{"workspaceId":"'${workspace_id}'"}' \
   --protected-settings '{"workspaceKey":"'${workspace_key}'"}'
 
-# Also you can directly replace the WorkspaceId and WorkspaceKey, don't use the variable, e.g. workspace_id and workspace_key. 
+# Also you can directly replace the WorkspaceId and WorkspaceKey, don't use the bash variable, e.g. workspace_id and workspace_key. 
 az vmss extension set \
   --resource-group ${rg_name} \
   --vmss-name ${vmss_name} \
