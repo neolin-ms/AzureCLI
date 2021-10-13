@@ -1,12 +1,10 @@
 #!/bin/bash
 
 # Reference
-## Quickstart: Create a public load balancer to load balance VMs using Azure CLI
 ## https://docs.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-cli?tabs=option-1-create-load-balancer-standard
-## Quickstart: Create a virtual machine scale set with the Azure CLI
 ## https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/quick-create-cli
-## az vmss
 ## https://docs.microsoft.com/en-us/cli/azure/vmss?view=azure-cli-latest
+## https://docs.microsoft.com/en-us/azure/load-balancer/howto-load-balancer-imds?tabs=linux
 
 # Sign in with Azure CLI
 #az login --use-device-code
@@ -56,7 +54,7 @@ az network public-ip prefix list -o table
 
 az network public-ip prefix show --resource-group ${rg_name} --name ${ipprefix_name}
 
-# Get the details of a public IP prefix resource.
+# Get the details of a public IP prefix resource and resource ID.
 subscription_id='<Subscription ID>'
 az network public-ip prefix show --name ${ipprefix_name} --resource-group ${rg_name} --subscription ${subscription_id} 
 az network public-ip prefix show --name ${ipprefix_name} --resource-group ${rg_name} --subscription ${subscription_id} --query id
@@ -75,3 +73,6 @@ az network public-ip prefix list --resource-group ${rg_name} --subscription ${su
 
 # List public IP addresses of VM instances within a set.
 az vmss list-instance-public-ips --name ${vmss_name} --resource-group ${rg_name} -o table
+
+# Retrieve load balancer metadata using the Azure Instance Metadata Service (IMDS) and public IP address of Instance of VMSS
+curl -H "Metadata:true" --noproxy "*" "http://169.254.169.254:80/metadata/loadbalancer?api-version=2020-10-01"
