@@ -46,7 +46,7 @@ az monitor log-analytics workspace get-shared-keys --resource-group ${rg_name} -
 workspace_id=<Log Analytics Workspace ID>
 workspace_key=<Workspace Primary Key>
 
-az vm extension set \
+az vmss extension set \
   --resource-group ${rg_name} \
   --vmss-name ${vmss_name} \
   --name OmsAgentForLinux \
@@ -54,7 +54,7 @@ az vm extension set \
   --settings '{"workspaceId":"${workspace_id}"}' \
   --protected-settings '{"workspaceKey":"${workspace_key}"}'
 
-az vm extension set \
+az vmss extension set \
   --resource-group ${rg_name} \
   --vmss-name ${vmss_name} \
   --name OmsAgentForLinux \
