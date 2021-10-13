@@ -21,13 +21,14 @@ az group create --name ${rg_name} --location ${region_name}
 az vmss create \
   --resource-group ${rg_name} \
   --name ${vmss_name} \
-  --image CentOS \
+  --image Canonical|UbuntuServer|18.04-LTS|18.04.202103250 \
   --upgrade-policy-mode automatic \
   --lb-sku Standard \
   --admin-username azureuser \
   --generate-ssh-keys
   
 ##Option Parameters
+##--image CentOS \
 ##[--lb-sku {Basic, Gateway, Standard}]
 
 # Finally, tell Azure to install and enable the extension.
