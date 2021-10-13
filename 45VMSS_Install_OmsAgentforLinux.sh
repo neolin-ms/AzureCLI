@@ -7,11 +7,11 @@
 # Login to Azure before you do anything else.
 az login
 
-# Select the subscription that contains the storage account.
+# Select the subscription.
 subscription_id=<Azure Subscription ID>
 az account set --subscription ${subscription_id}
 
-# Creaet a new resource group and VMSS
+# Creaet a new resource group and VMSS.
 rg_name=testcentosrg
 region_name=japaneast
 vmss_name=myScaleSet
@@ -31,6 +31,11 @@ az vmss create \
 ##--image Canonical:UbuntuServer:18.04-LTS:18.04.202103250 \
 ##--image CentOS \
 ##[--lb-sku {Basic, Gateway, Standard}]
+
+# Create a workspace instance.
+workspace_name=myworkspace1013
+
+az monitor log-analytics workspace create -g ${rg_name} -n ${workspace_name}
 
 # Finally, tell Azure to install and enable the extension.
 workspace_id=
