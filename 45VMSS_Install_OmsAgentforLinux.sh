@@ -3,6 +3,7 @@
 #References
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/oms-linux
 ## https://docs.microsoft.com/en-us/cli/azure/vmss/extension?view=azure-cli-latest#az_vmss_extension_set
+## https://docs.microsoft.com/en-us/cli/azure/monitor/log-analytics/workspace?view=azure-cli-latest#az_monitor_log_analytics_workspace_show
 
 # Login to Azure before you do anything else.
 az login
@@ -37,9 +38,13 @@ workspace_name=myworkspace1013
 
 az monitor log-analytics workspace create -g ${rg_name} -n ${workspace_name}
 
+# Get the Log Analytocs workspace ID and Primany Key
+az monitor log-analytics workspace show --resource-group ${rg_name} --workspace-name ${workspace_name} --query customerId 
+az monitor log-analytics workspace get-shared-keys --resource-group ${rg_name} --workspace-name ${workspace_name}
+
 # Finally, tell Azure to install and enable the extension.
-workspace_id=
-workspace_key=
+workspace_id=<Log Analytics Workspace ID>
+workspace_key=<Workspace Primary Key>
 
 az vm extension set \
   --resource-group ${rg_name} \
