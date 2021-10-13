@@ -1,6 +1,8 @@
 #!/bin/bash
 
 #References
+## https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/oms-linux
+## https://docs.microsoft.com/en-us/cli/azure/vmss/extension?view=azure-cli-latest#az_vmss_extension_set
 
 # Login to Azure before you do anything else.
 az login
