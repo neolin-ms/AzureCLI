@@ -6,6 +6,8 @@
 ## https://docs.microsoft.com/en-us/cli/azure/vmss/extension?view=azure-cli-latest#az_vmss_extension_set
 ## https://docs.microsoft.com/en-us/cli/azure/monitor/log-analytics/workspace?view=azure-cli-latest#az_monitor_log_analytics_workspace_show
 ## https://docs.microsoft.com/en-us/cli/azure/monitor/log-analytics/workspace?view=azure-cli-latest#az_monitor_log_analytics_workspace_get_shared_keys
+## https://github.com/microsoft/OMS-Agent-for-Linux/blob/master/docs/OMS-Agent-for-Linux.md
+## https://docs.microsoft.com/en-us/azure/azure-monitor/agents/agent-linux-troubleshoot
 
 # Login to Azure before you do anything else.
 az login
@@ -64,3 +66,22 @@ az vmss extension set \
   --publisher Microsoft.EnterpriseCloud.Monitoring \
   --settings '{"workspaceId":"WorkspaceId"}' \
   --protected-settings '{"workspaceKey":"WorkspaceKey"}'
+
+# Onboarding with Azure Monitor Log Analytics workspace - Onboarding using the command line
+cd /opt/microsoft/omsagent/bin
+sudo ./omsadmin.sh -w <WorkspaceID> -s <Shared Key>
+
+# Onboarding with Azure Monitor Log Analytics workspace - Onboarding using a file
+
+## 1. Create the file /etc/omsagent-onboard.conf The file must be readable and writable for root.
+sudo vi /etc/omsagent-onboard.conf
+
+## 2. Insert the following lines in the file with your Workspace ID and Shared Key:
+WORKSPACE_ID=<WorkspaceID>
+SHARED_KEY=<Shared Key>
+
+## 3. Onboard to an Azure Monitor Log Analytics workspace:
+sudo /opt/microsoft/omsagent/bin/omsadmin.sh
+
+## 4. The file will be deleted on successful onboarding.
+
