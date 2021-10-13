@@ -51,37 +51,14 @@ az vmss extension set \
   --vmss-name ${vmss_name} \
   --name OmsAgentForLinux \
   --publisher Microsoft.EnterpriseCloud.Monitoring \
-  --settings '{"workspaceId":"${workspace_id}"}' \
-  --protected-settings '{"workspaceKey":"${workspace_key}"}'
-
-az vmss extension set \
-  --resource-group ${rg_name} \
-  --vmss-name ${vmss_name} \
-  --name OmsAgentForLinux \
-  --publisher Microsoft.EnterpriseCloud.Monitoring \
-  --settings '{"workspaceId":'${workspace_id}'}' \
-  --protected-settings '{"workspaceKey":'${workspace_key}'}'
-
-az vmss extension set \
-  --resource-group ${rg_name} \
-  --vmss-name ${vmss_name} \
-  --name OmsAgentForLinux \
-  --publisher Microsoft.EnterpriseCloud.Monitoring \
   --settings '{"workspaceId":"'${workspace_id}'"}' \
   --protected-settings '{"workspaceKey":"'${workspace_key}'"}'
 
+# Also you can directly replace the WorkspaceId and WorkspaceKey, don't use the variable, e.g. workspace_id and workspace_key. 
 az vmss extension set \
   --resource-group ${rg_name} \
   --vmss-name ${vmss_name} \
   --name OmsAgentForLinux \
   --publisher Microsoft.EnterpriseCloud.Monitoring \
-  --settings '{"workspaceId":${workspace_id}}' \
-  --protected-settings '{"workspaceKey":${workspace_key}}'
-
-az vmss extension set \
-  --resource-group ${rg_name} \
-  --vmss-name ${vmss_name} \
-  --name OmsAgentForLinux \
-  --publisher Microsoft.EnterpriseCloud.Monitoring \
-  --settings '{"workspaceId":"myWorkspaceId"}' \
-  --protected-settings '{"workspaceKey":"myWorkspaceKey"}'
+  --settings '{"workspaceId":"WorkspaceId"}' \
+  --protected-settings '{"workspaceKey":"WorkspaceKey"}'
