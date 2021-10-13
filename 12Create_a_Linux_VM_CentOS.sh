@@ -11,7 +11,7 @@
 #az login --use-device-code
 
 # Create resource group
-az group create --name testCentOSRg --location eastasia 
+az group create --name testCentOSRg --location eastasia
 
 # Create virtual machine
 az vm create \
