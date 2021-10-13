@@ -13,7 +13,7 @@ az account set --subscription ${subscription_id}
 
 # Creaet a new resource group and VMSS
 rg_name=testcentosrg
-region_name=eastus
+region_name=japaneast
 vmss_name=myScaleSet
 
 az group create --name ${rg_name} --location ${region_name}
