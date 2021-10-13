@@ -76,3 +76,13 @@ az vmss list-instance-public-ips --name ${vmss_name} --resource-group ${rg_name}
 
 # Retrieve load balancer metadata using the Azure Instance Metadata Service (IMDS) and public IP address of Instance of VMSS
 curl -H "Metadata:true" --noproxy "*" "http://169.254.169.254:80/metadata/loadbalancer?api-version=2020-10-01"
+
+# Retrieve instance metadata using the Azure Instance Metadata Service (IMDS) - example
+curl -H Metadata:true "*" "http://169.254.169.254/metadata/instance?api-version=2020-09-01"
+curl -H Metadata:true "*" "http://169.254.169.16/metadata/instance?api-version=2020-09-01"
+curl -H Metadata:true "*" "http://169.254.169.254/metadata/instance/network/interface?api-version=2019-06-01"
+
+curl -H Metadata:true --noproxy "*" "http://169.254.169.254/?api-version=2021-02-01"
+curl -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2021-02-01"
+curl -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/network?api-version=2021-02-01"
+curl -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/network/interface?api-version=2021-02-01"
