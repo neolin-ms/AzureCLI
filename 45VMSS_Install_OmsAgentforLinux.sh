@@ -21,13 +21,14 @@ az group create --name ${rg_name} --location ${region_name}
 az vmss create \
   --resource-group ${rg_name} \
   --name ${vmss_name} \
-  --image Canonical|UbuntuServer|18.04-LTS|18.04.202103250 \
+  --image Canonical:UbuntuServer:18.04-LTS:18.04.202103250 \
   --upgrade-policy-mode automatic \
   --lb-sku Standard \
   --admin-username azureuser \
   --generate-ssh-keys
   
 ##Option Parameters
+##--image Canonical:UbuntuServer:18.04-LTS:18.04.202103250 \
 ##--image CentOS \
 ##[--lb-sku {Basic, Gateway, Standard}]
 
