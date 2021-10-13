@@ -51,8 +51,10 @@ ipprefix_name=MyPublicIPPrefix
 
 az network public-ip prefix create --length 30 --location ${region_name} --name ${ipprefix_name} --resource-group ${rg_name} 
 
-# List public IP prefix resources.
+# List public IP prefix resources and show the Public IP Prefix info.
 az network public-ip prefix list -o table
+
+az network public-ip prefix show --resource-group ${rg_name} --name ${ipprefix_name}
 
 # Get the details of a public IP prefix resource.
 subscription_id='<Subscription ID>'
