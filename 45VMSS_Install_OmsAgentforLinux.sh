@@ -59,5 +59,13 @@ az vmss extension set \
   --vmss-name ${vmss_name} \
   --name OmsAgentForLinux \
   --publisher Microsoft.EnterpriseCloud.Monitoring \
+  --settings '{"workspaceId":${workspace_id}}' \
+  --protected-settings '{"workspaceKey":${workspace_key}}'
+
+az vmss extension set \
+  --resource-group ${rg_name} \
+  --vmss-name ${vmss_name} \
+  --name OmsAgentForLinux \
+  --publisher Microsoft.EnterpriseCloud.Monitoring \
   --settings '{"workspaceId":"myWorkspaceId"}' \
   --protected-settings '{"workspaceKey":"myWorkspaceKey"}'
