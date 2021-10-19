@@ -69,7 +69,7 @@ az vmss extension set \
 
 # Onboarding with Azure Monitor Log Analytics workspace - Onboarding using the command line
 cd /opt/microsoft/omsagent/bin
-sudo ./omsadmin.sh -w <WorkspaceID> -s <Shared Key>
+sudo ./omsadmin.sh -w <WorkspaceID> -s <Shared Key> -v
 
 # Onboarding with Azure Monitor Log Analytics workspace - Onboarding using a file
 
@@ -81,7 +81,11 @@ WORKSPACE_ID=<WorkspaceID>
 SHARED_KEY=<Shared Key>
 
 ## 3. Onboard to an Azure Monitor Log Analytics workspace:
-sudo /opt/microsoft/omsagent/bin/omsadmin.sh
+sudo /opt/microsoft/omsagent/bin/omsadmin.sh -v
 
 ## 4. The file will be deleted on successful onboarding.
+sudo /opt/microsoft/omsagent/bin/omsadmin.sh -l
+
+## 5. Other operion of omsadmin.sh
+sudo /opt/microsoft/omsagent/bin/omsadmin.sh -h
 
