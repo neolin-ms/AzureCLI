@@ -89,3 +89,30 @@ sudo /opt/microsoft/omsagent/bin/omsadmin.sh -l
 ## 5. Other operion of omsadmin.sh
 sudo /opt/microsoft/omsagent/bin/omsadmin.sh -h
 
+Maintenance tool for OMS:                                                                                               
+Onboarding:                                                                                                             
+omsadmin.sh -w <workspace id> -s <shared key> [-d <top level domain>]
+
+List Workspaces: 
+omsadmin.sh -l
+
+Remove Workspace:
+omsadmin.sh -x <workspace id>
+
+Remove All Workspaces:
+omsadmin.sh -X
+
+Update workspace configuration and folder structure to multi-homing schema:
+omsadmin.sh -U                                                                                                                                                                                                                                  
+
+Onboard the workspace with a multi-homing marker. The workspace will be regarded as secondary.                          
+omsadmin.sh -m <multi-homing marker>                                                                                                                                                                                                            
+
+Define proxy settings ('-u' will prompt for password):                                                                  
+omsadmin.sh [-u user] -p host[:port]                                                                                                                                                                                                            
+
+Azure resource ID:                                                                                                      
+omsadmin.sh -a <Azure resource ID>                                                                                                                                                                                                              
+
+Detect if omiserver is listening to SCOM port:                                                                          
+omsadmin.sh -o
