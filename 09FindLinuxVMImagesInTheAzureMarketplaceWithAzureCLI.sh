@@ -21,11 +21,15 @@ az vm image list-publishers --location westus --output table
 
 # Pass the location and the publisher 
 az vm image list-offers --location westus --publisher Canonical --output table
+az vm image list-offers --location westus --publisher OpenLogic --output table
+az vm image list-offers --location westus --publisher MicrosoftWindowsDesktop --output table
 
 # Check the SKUs
 az vm image list-skus --location westus --publisher Canonical --offer UbuntuServer --output table
 az vm image list-skus --location eastus --publisher OpenLogic --offer CentOS --output table
+az vm image list-skus --location westus --publisher MicrosoftWindowsDesktop --offer windows-7 --output table
 
 # Find a secific version of the SKU you want
 az vm image list --location westus --publisher Canonical --offer UbuntuServer --sku 18.04-LTS --all --output table
 az vm image list --location westus --publisher OpenLogic --offer CentOS --sku 7_4 --all --output table
+az vm image list --location westus --publisher MicrosoftWindowsDesktop --offer windows-7 --sku win7-enterprise --all --output table
