@@ -8,6 +8,9 @@
 ## https://docs.microsoft.com/en-us/cli/azure/monitor/log-analytics/workspace?view=azure-cli-latest#az_monitor_log_analytics_workspace_get_shared_keys
 ## https://github.com/microsoft/OMS-Agent-for-Linux/blob/master/docs/OMS-Agent-for-Linux.md
 ## https://docs.microsoft.com/en-us/azure/azure-monitor/agents/agent-linux-troubleshoot
+## https://blog.surgut.co.uk/2019/08/how-to-disable-tls-10-and-tls-11-on.html
+## https://devanswers.co/test-server-tls-1-2-ubuntu/
+## https://www.openssl.org/docs/man3.0/man5/config.html
 
 # Login to Azure before you do anything else.
 az login
@@ -68,8 +71,7 @@ az vmss extension set \
   --protected-settings '{"workspaceKey":"WorkspaceKey"}'
 
 # Onboarding with Azure Monitor Log Analytics workspace - Onboarding using the command line
-cd /opt/microsoft/omsagent/bin
-sudo ./omsadmin.sh -w <WorkspaceID> -s <Shared Key> -v
+cd /opt/microsoft/omsagent/bin/omsadmin.sh -w <Workspace ID> -s <Primary Key> -v
 
 # Onboarding with Azure Monitor Log Analytics workspace - Onboarding using a file
 
@@ -116,3 +118,32 @@ omsadmin.sh -a <Azure resource ID>
 
 Detect if omiserver is listening to SCOM port:                                                                          
 omsadmin.sh -o
+
+# How to test a server for TLS v1.2/1.3 support in Linux
+## 1. openssl for TLS v1.2
+openssl s_client -connect google.com:443 -tls1_2
+
+## 2. openssl for TLS v1.3
+openssl s_client -connect google.com:443 -tls1_3
+
+# How to disable TLS v1.0/1.1 in OpenSSL
+##1. Edit /etc/ssl/openssl.cnf
+sudo vi /etc/ssl/openssl.cnf
+
+## 2. After oid_section stanza add
+# System default
+openssl_conf = default_conf
+
+## 3. After oid_section stanza add
+[default_conf]
+ssl_conf = ssl_sect
+
+[ssl_sect]
+system_default = system_default_sect
+
+[system_default_sect]
+MinProtocol = TLSv1.2
+# MaxProtocol = TLSv1.2
+CipherString = DEFAULT@SECLEVEL=2
+
+## 4. Save the file
