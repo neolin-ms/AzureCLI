@@ -1,12 +1,12 @@
 #!/bin
 
-## Reference
-Share gallery VM images across Azure tenants using the Azure CLI<br>
-https://docs.microsoft.com/en-us/azure/virtual-machines/linux/share-images-across-tenants<br>
+# Reference
+## Share gallery VM images across Azure tenants using the Azure CLI
+## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/share-images-across-tenants
 
 #Tenant 1, Subscription 1, Source SIG
-App registrations: myGalleryApp0804neolin<br>
-Application (client) ID: 18a04353-7080-4df1-aa44-xxxxxxxxxxxx<br>
+App registrations: myGalleryApp0804neolin
+Application (client) ID: 18a04353-7080-4df1-aa44-xxxxxxxxxxxx
 Serets: l2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Tenant 1: 56d6941c-896b-4583-9a66-xxxxxxxxxxxx
 Subscription 1: a76944aa-b763-4bb1-85eb-xxxxxxxxxxxx
