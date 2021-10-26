@@ -4,21 +4,21 @@
 ## Share gallery VM images across Azure tenants using the Azure CLI
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/share-images-across-tenants
 
-#Tenant 1, Subscription 1, Source SIG
-App registrations: myGalleryApp0804neolin
-Application (client) ID: 18a04353-7080-4df1-aa44-xxxxxxxxxxxx
-Serets: l2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Tenant 1: 56d6941c-896b-4583-9a66-xxxxxxxxxxxx
-Subscription 1: a76944aa-b763-4bb1-85eb-xxxxxxxxxxxx
-Source SIG Image Version: /subscriptions/a76944aa-b763-4bb1-xxxxxxxxxxxx/resourceGroups/myGalleryRG/providers/Mic rosoft.Compute/galleries/myGalleryWindows0805/images/mydefinitionwindows0805/versions/1.0.0
-Source SIG name: myGalleryWindows0805 (RBAC role: Reader)
+# Tenant 1, Subscription 1, Source SIG
+## App registrations: myGalleryApp0804neolin
+## Application (client) ID: 18a04353-7080-4df1-aa44-xxxxxxxxxxxx
+## Serets: l2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+## Tenant 1: 56d6941c-896b-4583-9a66-xxxxxxxxxxxx
+## Subscription 1: a76944aa-b763-4bb1-85eb-xxxxxxxxxxxx
+## Source SIG Image Version: /subscriptions/a76944aa-b763-4bb1-xxxxxxxxxxxx/resourceGroups/myGalleryRG/providers/Mic rosoft.Compute/galleries/myGalleryWindows0805/images/mydefinitionwindows0805/versions/1.0.0
+## Source SIG name: myGalleryWindows0805 (RBAC role: Reader)
 
-#Tenant 2, Subscription 2, Destination SIG
-Tenant 2: 72f988bf-86f1-41af-91ab-xxxxxxxxxxxx
-Subscription 2: 60796668-979e-4d0a-b3cd-xxxxxxxxxxxx
-Destination SIG Definition: /subscriptions/60796668-979e-4d0a-b3cd-xxxxxxxxxxxx/resourceGroups/testubunturg/providers/Microsoft .Compute/galleries/myDestinationGallery0805/images/myDestinationImgDef0805
-Destination SIG name: myDestinationGallery0805
-Destination resource: testubunturg (RBAC role: Contributor)
+# Tenant 2, Subscription 2, Destination SIG
+## Tenant 2: 72f988bf-86f1-41af-91ab-xxxxxxxxxxxx
+## Subscription 2: 60796668-979e-4d0a-b3cd-xxxxxxxxxxxx
+## Destination SIG Definition: /subscriptions/60796668-979e-4d0a-b3cd-xxxxxxxxxxxx/resourceGroups/testubunturg/providers/Microsoft .Compute/galleries/myDestinationGallery0805/images/myDestinationImgDef0805
+## Destination SIG name: myDestinationGallery0805
+## Destination resource: testubunturg (RBAC role: Contributor)
 
 #Sign in the service principal for tenant 1 using the appID, the app key, and the ID of tenant 1
 az account clear
