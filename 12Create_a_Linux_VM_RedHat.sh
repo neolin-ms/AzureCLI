@@ -5,13 +5,13 @@
 ## Find Linux VM images in the Azure Marketplace with the AzureCLI                                                                                                                                        ## https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage 
 
 # Create resource group
-az group create --name testRedHatRg --location southeastasia 
+az group create --name testRedHatRg --location eastasia 
 
 # Create virtual machine
 az vm create \
     --resource-group testRedHatRg \
-    --name myRedHat82VM1005 \
-    --image RedHat:RHEL:8.2:8.2.2021040911 \
+    --name myRedHat83lvmVM1103 \
+    --image RedHat:RHEL:8-LVM:8.3.2021091103 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
@@ -20,6 +20,10 @@ az vm create \
 #--image RedHat:RHEL:8.2:8.2.2021040911 \
 #--image RedHat:RHEL:7.6:7.6.2021051101 \
 #--image RedHat:RHEL:7.8:7.8.2021051701 \
+#--image RedHat:RHEL:8_3:8.3.2021091101 \
+#--image RedHat:RHEL:8_3:8.3.2021041912 \
+#--image RedHat:RHEL:8-LVM:8.3.2021040401 \ 
+#--image RedHat:RHEL:8-LVM:8.3.2021091103 \
 
 #VM size example
 #--size Standard_D4s_v3 \
