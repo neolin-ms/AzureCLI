@@ -10,8 +10,8 @@ az group create --name testRedHatRg --location eastasia
 # Create virtual machine
 az vm create \
     --resource-group testRedHatRg \
-    --name myRedHat83lvmVM1103 \
-    --image RedHat:RHEL:8-LVM:8.3.2021091103 \
+    --name myRedHat83rawVM0409 \
+    --image RedHat:rhel-raw:8_3:8.3.2021040901 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
@@ -24,6 +24,7 @@ az vm create \
 #--image RedHat:RHEL:8_3:8.3.2021041912 \
 #--image RedHat:RHEL:8-LVM:8.3.2021040401 \ 
 #--image RedHat:RHEL:8-LVM:8.3.2021091103 \
+#--image RedHat:rhel-raw:8_3:8.3.2021040901 \
 
 #VM size example
 #--size Standard_D4s_v3 \
