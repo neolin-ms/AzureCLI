@@ -30,6 +30,7 @@ az vm image list-skus --location westus --publisher Canonical --offer UbuntuServ
 az vm image list-skus --location eastus --publisher OpenLogic --offer CentOS --output table
 az vm image list-skus --location westus --publisher MicrosoftWindowsDesktop --offer windows-7 --output table
 az vm image list-skus --location eastus --publisher RedHat --offer RHEL --output table
+az vm image list-skus --location eastus --publisher RedHat --offer rhel-raw --output table
 
 # Find a secific version of the SKU you want
 az vm image list --location westus --publisher Canonical --offer UbuntuServer --sku 18.04-LTS --all --output table
@@ -38,3 +39,4 @@ az vm image list --location westus --publisher MicrosoftWindowsDesktop --offer w
 az vm image list --location westus --publisher RedHat --offer RHEL --sku 8_3 --all --output table
 az vm image list --location westus --publisher RedHat --offer RHEL --sku 8_4 --all --output table
 az vm image list --location westus --publisher RedHat --offer RHEL --sku 8-lvm --all --output table
+az vm image list --location westus --publisher RedHat --offer rhel-raw --sku 8_3 --all --output table
