@@ -126,7 +126,7 @@ openssl s_client -connect <Workspace ID>.oms.opinsights.azure.com:443 -tls1_2
 
 ## 2. openssl for TLS v1.3
 openssl s_client -connect google.com:443 -tls1_3
-penssl s_client -connect <Workspace ID>.oms.opinsights.azure.com:443 -tls1_3
+openssl s_client -connect <Workspace ID>.oms.opinsights.azure.com:443 -tls1_3
 
 # How to disable TLS v1.0/1.1 in OpenSSL
 ##1. Edit /etc/ssl/openssl.cnf
