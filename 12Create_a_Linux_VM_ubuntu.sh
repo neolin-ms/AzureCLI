@@ -10,8 +10,8 @@ az group create --name testUbuntuRg --location eastasia
 # Create virtual machine
 az vm create \
     --resource-group testUbuntuRg \
-    --name myUbuntu1804vm1021 \
-    --image Canonical:UbuntuServer:18.04-LTS:18.04.202107200 \
+    --name myUbuntu1904vm1110 \
+    --image Canonical:UbuntuServer:19.04:19.04.201908140 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
@@ -22,6 +22,7 @@ az vm create \
 #--image Canonical:UbuntuServer:18_04-lts-gen2:18.04.202103250 \
 #--image Canonical:UbuntuServer:18.04-LTS:18.04.202106220 \
 #--image Canonical:UbuntuServer:18.04-LTS:18.04.202107200 \
+#--image Canonical:UbuntuServer:19.04:19.04.201908140 \
 
 # VM size example
 #--size Standard_D4s_v3 \

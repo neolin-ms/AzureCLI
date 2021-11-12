@@ -9,9 +9,9 @@ az group create --name testWindowsRg --location eastasia
 # Create a Virtual machine
 az vm create \
     --resource-group testWindowsRg \
-    --name myWin2019VM0622 \
+    --name myWin2019VM1112 \
     --image win2019datacenter \
-    --size Standard_D4s_v3 \
+    --size Standard_D4_v4 \
     --admin-username azureuser
 
 # Image version example
@@ -19,6 +19,7 @@ az vm create \
 
 # VM size example
 #--size Standard_D4s_v3 \
+#--size Standard_D4_v4 \
 
 # Open port 80 for web trffic 
 #az vm open-port --port 80 --resource-group myResourceGroup --name myVM

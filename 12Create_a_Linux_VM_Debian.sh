@@ -11,14 +11,15 @@ az group create --name testDebianRg --location eastasia
 # Create virtual machine
 az vm create \
     --resource-group testDebianRg \
-    --name myDebianVM92 \
-    --image credativ:Debian:9:9.20190221.0 \
+    --name myDebian11VM1110 \
+    --image debian:Debian-11:11:0.20211011.792 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
 
 #Image version example
 #--image Publisher:Offer:Sku:Version \
+#--image debian:debian-11:11:0.20211011.792 \
 
 #VM size example
 #--size Standard_D4s_v3 \

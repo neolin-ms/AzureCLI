@@ -29,6 +29,7 @@ az vm image list-offers --location westus --publisher RedHat --output table
 az vm image list-skus --location westus --publisher Canonical --offer UbuntuServer --output table
 az vm image list-skus --location eastus --publisher OpenLogic --offer CentOS --output table
 az vm image list-skus --location westus --publisher MicrosoftWindowsDesktop --offer windows-7 --output table
+az vm image list-skus --location westus --publisher MicrosoftWindowsDesktop --offer windows-10 --output table
 az vm image list-skus --location eastus --publisher RedHat --offer RHEL --output table
 az vm image list-skus --location eastus --publisher RedHat --offer rhel-raw --output table
 
@@ -36,6 +37,7 @@ az vm image list-skus --location eastus --publisher RedHat --offer rhel-raw --ou
 az vm image list --location westus --publisher Canonical --offer UbuntuServer --sku 18.04-LTS --all --output table
 az vm image list --location westus --publisher OpenLogic --offer CentOS --sku 7_4 --all --output table
 az vm image list --location westus --publisher MicrosoftWindowsDesktop --offer windows-7 --sku win7-enterprise --all --output table
+az vm image list --location westus --publisher MicrosoftWindowsDesktop --offer windows-10 --sku 19h2-ent --all --output table
 az vm image list --location westus --publisher RedHat --offer RHEL --sku 8_3 --all --output table
 az vm image list --location westus --publisher RedHat --offer RHEL --sku 8_4 --all --output table
 az vm image list --location westus --publisher RedHat --offer RHEL --sku 8-lvm --all --output table
