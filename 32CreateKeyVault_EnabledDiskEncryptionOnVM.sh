@@ -1,6 +1,6 @@
 #!/bin/bash
 
-//==Create VM
+# Create VM
 
 LOCATION="eastasia"
 RGNAME="testWindowsRg"
@@ -14,7 +14,7 @@ az vm create \
     --image win2019datacenter \
     --admin-username azureuser
 
-//==Create KV and KEK
+# Create KV and KEK
 
 KVRGNAME="testKvRg"
 KVNAME="testmyKv20210702"
@@ -32,7 +32,7 @@ az keyvault key create --name ${KEYNAME} --vault-name ${KVNAME} --kty RSA
 az keyvault key show --vault-name ${KVNAME} --name ${KEYNAME} --query key.kid -o tsv
 https://testmykv06222021.vault.azure.net/keys/testmykey0622/xxxxxxxxxxxxxxxx
 
-//==Show Disk Encryption Status
+# Show Disk Encryption Status
 
 az vm encryption show --name ${VMNAME} --resource-group ${RGNAME} --query "status" -o table
 
@@ -46,7 +46,7 @@ az vm show -d -g ${RGNAME} -n ${VMNAME} --query "storageProfile.dataDisks[].name
 dataDisk0
 dataDisk1
 
-//==Show Disk Encryption Info
+# Show Disk Encryption Info
 
 dataDisk0="dataDisk0"
 dataDisk1="dataDisk1"
