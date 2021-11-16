@@ -34,7 +34,8 @@ https://testmykv06222021.vault.azure.net/keys/testmykey0622/xxxxxxxxxxxxxxxx
 
 # Show Disk Encryption Status
 
-az vm encryption show --name ${VMNAME} --resource-group ${RGNAME} --query "status" -o table
+az vm encryption show --name ${VMNAME} --resource-group ${RGNAME} --query "status"
+az vm encryption show --name ${VMNAME} --resource-group ${RGNAME} --query "substatus"
 
 az vm encryption show -g ${RGNAME} -n ${VMNAME} --query "disks[*].[name, statuses[*].displayStatus]" -o table
 
