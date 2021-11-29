@@ -42,3 +42,4 @@ az vm image list --location westus --publisher RedHat --offer RHEL --sku 8_3 --a
 az vm image list --location westus --publisher RedHat --offer RHEL --sku 8_4 --all --output table
 az vm image list --location westus --publisher RedHat --offer RHEL --sku 8-lvm --all --output table
 az vm image list --location westus --publisher RedHat --offer rhel-raw --sku 8_3 --all --output table
+az vm image list --location westus --publisher RedHat --offer RHEL --sku 6.10 --all --output table
