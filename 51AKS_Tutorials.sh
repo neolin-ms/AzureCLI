@@ -15,6 +15,7 @@ tree
 docker-compose up -d
 docker images
 docker ps
+curl http://localhost:8080
 
 # 1.3 Clean up resources
 docker-compose down
@@ -37,6 +38,7 @@ az acr login --name ${acrName}
 ##You may want to use 'az acr login -n neomyacrtest --expose-token' to get an access token, which does not require Docker to be installed.
 ##An error occurred: DOCKER_COMMAND_ERROR
 ##Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json: dial unix /var/run/docker.sock: connect: permission denied 
+##Example commandes: $ echo '<Access-Token>' | sudo docker login neomyacrtest.azurecr.io --username 00000000-0000-0000-0000-000000000000 --password-stdin 
 
 # 2.3 Tag a container image
 
