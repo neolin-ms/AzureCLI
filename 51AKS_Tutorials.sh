@@ -24,7 +24,7 @@ docker-compose down
 rgName=myResourceGroup
 az group create --name ${rgName} --location eastus
 
-acrName=mytestacr1130
+acrName=neomyacrtest
 az acr create --resource-group ${rgName} --name ${acrName} --sku Basic
 
 # 2.2 Log in to the container registry
@@ -37,9 +37,9 @@ docker images
 
 az acr list --resource-group ${rgName} --query "[].{acrLoginServer:loginServer}" --output table
 
-mytestacr1130.azurecr.io
+neomyacrtest.azurecr.io
 
-docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 mytestacr1130.azurecr.io/azure-vote-front:v1
+docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 neomyacrtest.azurecr.io/azure-vote-front:v1
 
 # 2.4 Push images to registry
 
