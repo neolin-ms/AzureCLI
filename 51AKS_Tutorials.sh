@@ -21,11 +21,11 @@ docker-compose down
 
 # 2.1 Create an Azure Container Registry
 
-rgname=myResourceGroup
-az group create --name ${rgname} --location eastus
+rgName=myResourceGroup
+az group create --name ${rgName} --location eastus
 
 acrName=mytestacr1130
-az acr create --resource-group ${rgname} --name ${acrName} --sku Basic
+az acr create --resource-group ${rgName} --name ${acrName} --sku Basic
 
 # 2.2 Log in to the container registry
 
@@ -35,7 +35,7 @@ az acr login --name ${acrName}
 
 docker images
 
-az acr list --resource-group ${rgname} --query "[].{acrLoginServer:loginServer}" --output table
+az acr list --resource-group ${rgName} --query "[].{acrLoginServer:loginServer}" --output table
 
 mytestacr1130.azurecr.io
 
