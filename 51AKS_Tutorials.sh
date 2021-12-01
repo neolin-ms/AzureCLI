@@ -1,6 +1,23 @@
-eferences
-## https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr?tabs=azure-cli
-## https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
+#!/bin/bash
+
+#References
+## 1, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
+## 2, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr?tabs=azure-cli
+## 3, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
+## 4, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
+
+# 1.1 Get application code
+git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
+cd azure-voting-app-redis
+tree
+
+# 1.2 Create container images
+docker-compose up -d
+docker images
+docker ps
+
+# 1.3 Clean up resources
+docker-compose down
 
 # 2.1 Create an Azure Container Registry
 
