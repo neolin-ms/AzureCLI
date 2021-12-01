@@ -43,7 +43,7 @@ docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 neomyacrtest.azurecr.
 
 # 2.4 Push images to registry
 
-docker push mytestacr1130.azurecr.io/azure-vote-front:v1
+docker push neomyacrtest.azurecr.io/azure-vote-front:v1
 
 # 2.5 List images in registry
 
