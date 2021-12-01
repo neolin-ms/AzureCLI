@@ -31,6 +31,13 @@ az acr create --resource-group ${rgName} --name ${acrName} --sku Basic
 
 az acr login --name ${acrName}
 
+##2.2.1 When login acr, and get the error messages below, please check the link. 
+##https://stackoverflow.com/questions/51222996/docker-login-fails-on-a-server-with-no-x11-installed
+##Error Messages:
+##You may want to use 'az acr login -n neomyacrtest --expose-token' to get an access token, which does not require Docker to be installed.
+##An error occurred: DOCKER_COMMAND_ERROR
+##Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json: dial unix /var/run/docker.sock: connect: permission denied 
+
 # 2.3 Tag a container image
 
 docker images
