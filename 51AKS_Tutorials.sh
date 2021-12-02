@@ -5,6 +5,7 @@
 ## 2, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr?tabs=azure-cli
 ## 3, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
 ## 4, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
+## 5, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-scale?tabs=azure-cli
 
 # 1.1 Get application code
 git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
@@ -61,3 +62,47 @@ az acr repository list --name ${acrName} --output table
 az acr repository show-tags --name ${acrName} --repository azure-vote-front --output table
 
 # 3.1 Create a Kubernetes cluster
+aks_name=myAKSCluster
+az aks create \
+    --resource-group ${rg_name} \
+    --name ${aks_name} \
+    --node-count 2 \
+    --generate-ssh-keys \
+
+az aks update -n ${aks_name} -g ${rg_name} --attach-acr ${acrName}
+
+# 3.2 Install the Kubernetes CLI
+az aks install-cli
+
+# 3.3 Connect to cluster using kubectl
+az aks get-credentials --resource-group ${rg_name} --name ${aks_name}
+
+# 3.4 Verify the connection to your cluster
+kubectl get nodes -o wide
+kubectl get pods -n kube-system -o wide
+
+# 4.1 Update the manifest file
+az acr list --resource-group ${rg_name} --query "[].{acrLoginServer:loginServer}" --output table
+
+neomyacrlab.azurecr.io
+
+vi azure-vote-all-in-one-redis.yaml
+## containers:
+## - name: azure-vote-front
+  image: <acrName>.azurecr.io/azure-vote-front:v1
+
+# 4.1 Deploy the application
+kubectl apply -f azure-vote-all-in-one-redis.yaml
+
+# 4.1 Test the application
+kubectl get service azure-vote-front --watch 
+
+# 5.1 Manually scale pods
+kubectl get pods -n wide
+
+kubectl scale --replicas=5 deployment/azure-vote-front
+
+kubectl get pods -n wide
+
+# 5.2 Autoscale pods
+z aks show --resource-group ${rg_name} --name ${aks_name} --query kubernetesVersion --output table
