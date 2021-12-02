@@ -24,7 +24,8 @@ docker-compose down
 # 2.1 Create an Azure Container Registry
 
 rgName=myResourceGroup
-az group create --name ${rgName} --location eastus
+regionName=eastus
+az group create --name ${rgName} --location ${regionName}
 
 acrName=neomyacrtest
 az acr create --resource-group ${rgName} --name ${acrName} --sku Basic
@@ -62,27 +63,27 @@ az acr repository list --name ${acrName} --output table
 az acr repository show-tags --name ${acrName} --repository azure-vote-front --output table
 
 # 3.1 Create a Kubernetes cluster
-aks_name=myAKSCluster
+aksName=myAKSCluster
 az aks create \
-    --resource-group ${rg_name} \
-    --name ${aks_name} \
+    --resource-group ${rgName} \
+    --name ${aksName} \
     --node-count 2 \
     --generate-ssh-keys \
 
-az aks update -n ${aks_name} -g ${rg_name} --attach-acr ${acrName}
+az aks update -n ${aksName} -g ${rgName} --attach-acr ${acrName}
 
 # 3.2 Install the Kubernetes CLI
 az aks install-cli
 
 # 3.3 Connect to cluster using kubectl
-az aks get-credentials --resource-group ${rg_name} --name ${aks_name}
+az aks get-credentials --resource-group ${rgName} --name ${aksName}
 
 # 3.4 Verify the connection to your cluster
 kubectl get nodes -o wide
 kubectl get pods -n kube-system -o wide
 
 # 4.1 Update the manifest file
-az acr list --resource-group ${rg_name} --query "[].{acrLoginServer:loginServer}" --output table
+az acr list --resource-group ${rgName} --query "[].{acrLoginServer:loginServer}" --output table
 
 neomyacrlab.azurecr.io
 
@@ -105,4 +106,4 @@ kubectl scale --replicas=5 deployment/azure-vote-front
 kubectl get pods -n wide
 
 # 5.2 Autoscale pods
-z aks show --resource-group ${rg_name} --name ${aks_name} --query kubernetesVersion --output table
+z aks show --resource-group ${rgName} --name ${aksName} --query kubernetesVersion --output table
