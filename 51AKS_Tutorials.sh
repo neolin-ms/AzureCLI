@@ -106,4 +106,16 @@ kubectl scale --replicas=5 deployment/azure-vote-front
 kubectl get pods -n wide
 
 # 5.2 Autoscale pods
-z aks show --resource-group ${rgName} --name ${aksName} --query kubernetesVersion --output table
+az aks show --resource-group ${rgName} --name ${aksName} --query kubernetesVersion --output table
+
+kubectl autoscale deployment azure-vote-front --cpu-percent=50 --min=3 --max=10
+
+## or you can create a manifest file to define the autoscaler behavior and resoure limits, e.g. azure-vote-hpa.yaml
+## kubectl apply -f azure-vote-hpa.yaml
+
+kubectl get hpa
+
+# 5.3 Manually scale AKS nodes
+az aks scale --resource-group ${rgName} --name ${aksName} --node-count 3
+
+kubectl get nodes -o wide
