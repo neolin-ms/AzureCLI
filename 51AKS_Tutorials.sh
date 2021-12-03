@@ -7,6 +7,7 @@
 ## 4 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
 ## 5 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-scale?tabs=azure-cli
 ## 6 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-app-update?tabs=azure-cli
+## 7 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-upgrade-cluster?tabs=azure-cli
 
 # 1.1 Get application code
 git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
@@ -144,3 +145,23 @@ neomyacrlab.azurecr.io
 docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 neomyacrlab.azurecr.io/azure-vote-front:v2
 
 docker push neomyacrlab.azurecr.io/azure-vote-front:v2
+
+az acr login -n neomyacrlab --expose-token
+
+echo '<Access-Token>' | sudo docker login neomyacrlab.azurecr.io --username 00000000-0000-0000-0000-000000000000 --password-stdin
+
+# 6.5 Deploy the updated application
+kubectl set image deployment azure-vote-front azure-vote-front=neomyacrlab.azurecr.io/azure-vote-front:v2
+
+# 6.6 Test the updated application
+kubectl get service azure-vote-front
+
+# 7.1 Get available cluster versions
+az aks get-upgrades --resource-group ${rgName} --name ${aksName} -o table
+
+# 7.2 Upgrade a cluster
+k8sVersion=1.21.1
+az aks upgrade \
+    --resource-group ${rgName} \
+    --name ${aksName} \
+    --kubernetes-version ${k8sVersion}
