@@ -1,11 +1,12 @@
 #!/bin/bash
 
 #References
-## 1, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
-## 2, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr?tabs=azure-cli
-## 3, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
-## 4, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
-## 5, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-scale?tabs=azure-cli
+## 1 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
+## 2 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr?tabs=azure-cli
+## 3 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
+## 4 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
+## 5 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-scale?tabs=azure-cli
+## 6 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-app-update?tabs=azure-cli
 
 # 1.1 Get application code
 git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
@@ -27,7 +28,7 @@ rgName=myResourceGroup
 regionName=eastus
 az group create --name ${rgName} --location ${regionName}
 
-acrName=neomyacrtest
+acrName=neomyacrlab
 az acr create --resource-group ${rgName} --name ${acrName} --sku Basic
 
 # 2.2 Log in to the container registry
@@ -119,3 +120,27 @@ kubectl get hpa
 az aks scale --resource-group ${rgName} --name ${aksName} --node-count 3
 
 kubectl get nodes -o wide
+
+# 6.1 Update an application
+vi azure-vote/azure-vote/config_file.cfg
+
+### UI Configurations
+##TITLE = 'Azure Voting App'
+##VOTE1VALUE = 'Blue'
+##VOTE2VALUE = 'Purple'
+##SHOWHOST = 'false'
+
+# 6.2 Update the container image
+docker-compose up --build -d
+
+# 6.3 Test the application locally
+curl http://localhost:8080
+
+# 6.4 Tag and push the image
+az acr list --resource-group ${rgName} --query "[].{acrLoginServer:loginServer}" --output table
+
+neomyacrlab.azurecr.io
+
+docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 neomyacrlab.azurecr.io/azure-vote-front:v2
+
+docker push neomyacrlab.azurecr.io/azure-vote-front:v2
