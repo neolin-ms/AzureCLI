@@ -165,3 +165,9 @@ az aks upgrade \
     --resource-group ${rgName} \
     --name ${aksName} \
     --kubernetes-version ${k8sVersion}
+
+# 7.3 Validate an upgrade
+az aks show --resource-group ${rgName} --name ${aksName} --output table
+
+# 7.4 Delete the cluster
+az group delete --name ${rgName} --yes --no-wait
