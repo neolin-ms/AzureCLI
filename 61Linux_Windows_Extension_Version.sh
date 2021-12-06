@@ -3,6 +3,8 @@
 ## References
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/oms-linux
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/oms-windows
+## https://techcommunity.microsoft.com/t5/itops-talk-blog/how-to-query-azure-resources-using-the-azure-cli/ba-p/360147
+## https://docs.microsoft.com/en-us/cli/azure/format-output-azure-cli
 
 #az login --use-device-code
 Num=`az vm list -o tsv | wc -l`
