@@ -9,7 +9,7 @@ az group create --name testWindowsRg --location eastasia
 # Create a Virtual machine
 az vm create \
     --resource-group testWindowsRg \
-    --name myWin10vm1112 \
+    --name myWin10vm1206 \
     --image MicrosoftWindowsDesktop:Windows-10:19h2-ent:18363.1916.2111030305 \
     --size Standard_D4s_v3 \
     --admin-username azureuser
