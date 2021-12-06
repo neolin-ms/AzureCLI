@@ -4,6 +4,7 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/oms-linux
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/oms-windows
 
+#az login --use-device-code
 Num=`az vm list -o tsv | wc -l`
 for ((i=0; i<${Num}; ++i)); do 
   vmName=`az vm list --query "[$i].[name, resourceGroup]" -o tsv | sed -n 1p`
