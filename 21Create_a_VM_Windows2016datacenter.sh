@@ -4,12 +4,12 @@
 ## https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-cli
 
 # Create resource group
-az group create --name testWindowsRg --location eastus
+az group create --name testWindowsRg --location eastasia
 
 # Create a Virtual machine
 az vm create \
     --resource-group testWindowsRg \
-    --name myWin2016VM0929 \
+    --name myWin2016VM1213 \
     --image win2016datacenter \
     --size Standard_D4s_v3 \
     --admin-username azureuser

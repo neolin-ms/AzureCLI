@@ -9,7 +9,7 @@ az group create --name testWindowsRg --location eastasia
 # Create a Virtual machine
 az vm create \
     --resource-group testWindowsRg \
-    --name myWin2019VM1112 \
+    --name myWin2019VM1213 \
     --image win2019datacenter \
     --size Standard_D4_v4 \
     --admin-username azureuser
