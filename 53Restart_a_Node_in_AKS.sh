@@ -14,7 +14,7 @@ kubectl get nodes -o wide
 
 ## Restart a node in VMSS of AKS
 vmssRGname=MC_myResourceGroup_myAKSCluster_eastus
-instanceIds=0
 vmssName=aks-nodepool1-22208758-vmss
+instanceIds=2
 
-az vmss restart --instance-ids 0 --name ${vmssName} --resource-group ${vmssRGname} 
+az vmss restart --instance-ids ${instanceIds} --name ${vmssName} --resource-group ${vmssRGname} 
