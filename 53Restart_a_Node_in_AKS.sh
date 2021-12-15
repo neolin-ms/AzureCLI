@@ -18,3 +18,12 @@ vmssName=aks-nodepool1-22208758-vmss
 instanceIds=2
 
 az vmss restart --instance-ids ${instanceIds} --name ${vmssName} --resource-group ${vmssRGname} 
+
+## Show newwork info of VMSS of AKS
+az vmss show -n ${vmssName} -g ${vmssRGname} --query virtualMachineProfile.networkProfile.networkInterfaceConfigurations[].ipConfigurations[].subnet
+
+## Show subnet info of VNET of VMSS/AKS 
+vmssSubnetname=aks-subnet
+vmssVNetname=aks-vnet-22208758
+
+az network vnet subnet show -g {vmssRGname} -n ${vmssSubnetname} --vnet-name ${vmssVNetname}
