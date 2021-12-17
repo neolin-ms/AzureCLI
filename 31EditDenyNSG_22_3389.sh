@@ -2,6 +2,9 @@
 
 ## AzureCLI
 ## https://docs.microsoft.com/en-us/cli/azure/network/nsg?view=azure-cli-latest
+## https://docs.microsoft.com/en-us/cli/azure/network/nsg?view=azure-cli-latest#az_network_nsg_list
+## https://docs.microsoft.com/en-us/cli/azure/network/nsg/rule?view=azure-cli-latest#az_network_nsg_rule_list
+## https://docs.microsoft.com/en-us/cli/azure/network/nsg/rule?view=azure-cli-latest#az_network_nsg_rule_update
 
 # Sign in with Azure CLI
 #az login --use-device-code
