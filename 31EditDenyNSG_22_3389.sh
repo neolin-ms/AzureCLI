@@ -32,12 +32,16 @@ for ((i = 1 ; i <= ${rgCount} ; i++)); do
     for ((j = 1 ; j <= ${nsgCount} ; j++)); do
        nsgName=$(az network nsg list --resource-group ${rgName} --query [].name -o tsv | sed -n ${j}p)
        echo "NSG Name: ${nsgName}"
-       destPort=$(az network nsg rule list -g ${rgName} --nsg-name ${nsgName} --query [].destinationPortRange -o tsv)
-       echo "Destination Port Range: ${destPort}"
-       if [[ "${destPort}" = "22" ]]; then
-         publicIP=$(curl https://ipinfo.io/ip)
-         echo ${publicIP}
-       fi
+       ruleCount=$(az network nsg rule list --resource-group ${rgName} --nsg-name ${nsgName} --query [].name -o tsv | wc -l)
+       for ((k=1 ; k <= ${ruleCount} ; k++)); do
+	  echo ${ruleCount}     
+          destPort=$(az network nsg rule list -g ${rgName} --nsg-name ${nsgName} --query [].destinationPortRange -o tsv)
+          echo "Destination Port Range: ${destPort}"
+          if [[ "${destPort}" = "22" ]]; then
+            publicIP=$(curl https://ipinfo.io/ip -s)
+            echo ${publicIP}
+          fi
+       done
     done
   fi
 done
