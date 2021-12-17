@@ -11,29 +11,33 @@
 #az network nsg list --query "[?Name]"
 
 # Get information about a network security group.
-#az network nsg show -g ${rg_name} -n ${nsg_name}
+#az network nsg show -g ${rgName} -n ${nsgName}
 #az network nsg list --query [].name -o tsv
 #az network nsg list --query [].resourceGroup -o tsv
 
 # List all rules in a network security group
-#az network nsg rule list -g ${rg_name} --nsg-name ${nsg_name}
-#az network nsg rule list -g ${rg_name} --nsg-name ${nsg_name} --query [].destinationPortRange -o tsv
+#az network nsg rule list -g ${rgName} --nsg-name ${nsgName}
+#az network nsg rule list -g ${rgName} --nsg-name ${nsgName} --query [].destinationPortRange -o tsv
 
-rg_word_count=$(az group list --query [].name -o tsv | wc -l)
-for ((i = 1 ; i <= ${rg_word_count} ; i++)); do
-  rg_name=$(az group list --query [].name -o tsv | sed -n ${i}p)
-  echo "Resource Group Name ${i}: ${rg_name}"
-  nsg_name=$(az network nsg list --resource-group ${rg_name} --query [].name -o tsv)
-  if [[ -z "${nsg_name}" ]]; then
+rgCount=$(az group list --query [].name -o tsv | wc -l)
+for ((i = 1 ; i <= ${rgCount} ; i++)); do
+  rgName=$(az group list --query [].name -o tsv | sed -n ${i}p)
+  echo "Resource Group Name ${i}: ${rgName}"
+  nsgName=$(az network nsg list --resource-group ${rgName} --query [].name -o tsv)
+  if [[ -z "${nsgName}" ]]; then
     echo "This Resource Group hasn't any NSGs."
     echo "------------------------------------"
-  elif [[ -n "${nsg_name}" ]]; then
-    nsg_word_count=$(az network nsg list --resource-group ${rg_name} --query [].name -o tsv | wc -l)
-    for ((j = 1 ; j <= ${nsg_word_count} ; j++)); do
-         nsg_name=$(az network nsg list --resource-group ${rg_name} --query [].name -o tsv | sed -n ${j}p)
-         echo "NSG Name: ${nsg_name}"
-         dest_port=$(az network nsg rule list -g ${rg_name} --nsg-name ${nsg_name} --query [].destinationPortRange -o tsv)
-         echo "Destination Port Range: ${dest_port}"
+  elif [[ -n "${nsgName}" ]]; then
+    nsgCount=$(az network nsg list --resource-group ${rgName} --query [].name -o tsv | wc -l)
+    for ((j = 1 ; j <= ${nsgCount} ; j++)); do
+       nsgName=$(az network nsg list --resource-group ${rgName} --query [].name -o tsv | sed -n ${j}p)
+       echo "NSG Name: ${nsgName}"
+       destPort=$(az network nsg rule list -g ${rgName} --nsg-name ${nsgName} --query [].destinationPortRange -o tsv)
+       echo "Destination Port Range: ${destPort}"
+       if [[ "${destPort}" = "22" ]]; then
+         publicIP=$(curl https://ipinfo.io/ipi)
+         echo ${publicIP}
+       fi
     done
   fi
 done
