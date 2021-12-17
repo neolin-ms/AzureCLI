@@ -35,7 +35,7 @@ for ((i = 1 ; i <= ${rgCount} ; i++)); do
        destPort=$(az network nsg rule list -g ${rgName} --nsg-name ${nsgName} --query [].destinationPortRange -o tsv)
        echo "Destination Port Range: ${destPort}"
        if [[ "${destPort}" = "22" ]]; then
-         publicIP=$(curl https://ipinfo.io/ipi)
+         publicIP=$(curl https://ipinfo.io/ip)
          echo ${publicIP}
        fi
     done
