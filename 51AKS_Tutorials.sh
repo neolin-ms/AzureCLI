@@ -70,7 +70,7 @@ az aks create \
     --resource-group ${rgName} \
     --name ${aksName} \
     --node-count 2 \
-    --generate-ssh-keys \
+    --generate-ssh-keys
 
 az aks update -n ${aksName} -g ${rgName} --attach-acr ${acrName}
 

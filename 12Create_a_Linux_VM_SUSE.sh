@@ -9,14 +9,15 @@ az group create --name testSUSERg --location westus2
 # Create virtual machine
 az vm create \
     --resource-group testSUSERg \
-    --name mySUSEVM15sp2westus2 \
-    --image SUSE:sles-15-sp2:gen2:2021.03.03 \
+    --name mySUSEVM15sp3 \
+    --image SUSE:sles-15-sp3:gen1:2021.12.19 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
 
 # Image version example
 #--image SUSE:sles-15-sp2:gen2:2021.03.03 \
+#--image SUSE:sles-15-sp3:gen1:2021.12.19 \
 
 # VM size example
 #--size Standard_D4s_v3 \
