@@ -10,7 +10,7 @@ az group create --name testUbuntuRg --location eastasia
 # Create virtual machine
 az vm create \
     --resource-group testUbuntuRg \
-    --name myUbuntu1804vm1201 \
+    --name myUbuntu1804vm1230 \
     --image Canonical:UbuntuServer:18.04-LTS:18.04.202107200 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
