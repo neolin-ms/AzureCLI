@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # References
+## kubectl Cheat Sheet, https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 ## Step.1 Prepare application for AKS, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
 ## Step.2 Create continer registry, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr?tabs=azure-cli
 ## Step.3 Create Kubernetes cluster, https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
