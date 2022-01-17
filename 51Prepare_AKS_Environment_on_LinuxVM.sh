@@ -6,14 +6,6 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 # Login to Azure
 az login --use-device-code
 
-# Confirm AKS cluster is using managed identity (https://docs.microsoft.com/en-us/azure/aks/use-managed-identity)
-az aks show -g myResourceGroup -n myCluster --query "servicePrincipalProfile"
-
-az aks show -g StagingGroup -n planStagingCluster --query "servicePrincipalProfile"
-
-# Find the control plane system-assigned identity's object ID
-az aks show -g StagingGroup -n planStagingCluster --query "identity"
-
 # Docker install on ubuntu (https://docs.docker.com/engine/install/ubuntu/)
 sudo apt-get update
 
@@ -53,3 +45,15 @@ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt
 sudo apt-get update
 sudo apt-get install helm
 
+# Connect to the cluster (https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#connect-to-the-cluster)
+az aks install-cli
+az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+kubectl get nodes
+
+# Confirm AKS cluster is using managed identity (https://docs.microsoft.com/en-us/azure/aks/use-managed-identity)
+az aks show -g myResourceGroup -n myCluster --query "servicePrincipalProfile"
+
+az aks show -g StagingGroup -n planStagingCluster --query "servicePrincipalProfile"
+
+# Find the control plane system-assigned identity's object ID
+az aks show -g StagingGroup -n planStagingCluster --query "identity"
