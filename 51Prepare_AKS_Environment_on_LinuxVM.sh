@@ -45,6 +45,11 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 docker-compose --version
 
-# Configure ACR integration for existing AKS clusters
+# Installing Helm (https://helm.sh/docs/intro/install/)
+## From Apt (Debian/Ubuntu)
+curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+sudo apt-get install apt-transport-https --yes
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
 
-az aks update -n myCluster -g myResourceGroup --attach-acr acrtestneo20211230
