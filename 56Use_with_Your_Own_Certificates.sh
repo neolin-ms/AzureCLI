@@ -1,5 +1,7 @@
+#!/bin/bash
 
-# Create a new AKS cluster with ACR integration (https://docs.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli#create-a-new-aks-cluster-with-acr-integration)
+# Create a new AKS cluster with ACR integration 
+# https://docs.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli#create-a-new-aks-cluster-with-acr-integration
 
 ## set this to the name of your Azure Container Registry.  It must be globally unique
 MYACR=testmyacr0117
@@ -80,6 +82,19 @@ kubectl create secret tls aks-ingress-tls \
 	
 kubectl get secret -n dotapi
 
+###==Run only one demo application(https://docs.microsoft.com/en-us/azure/aks/ingress-own-tls?tabs=azure-cli#run-demo-applications)==##
+
+#Run demo application 
+kubectl apply -f aks-helloworld.yaml --namespace dotapi
+
+# Create an ingress route for one demo application
+kubectl apply -f hello-world-ingress-1.yaml --namespace dotapi
+
+# Test the ingress configuration
+curl -v -k --resolve demo.azure.com:443:52.224.145.250 https://demo.azure.com
+
+###==Run two demo applications(https://docs.microsoft.com/en-us/azure/aks/ingress-own-tls?tabs=azure-cli#run-demo-applications)==##
+
 # Run demo applications
 kubectl apply -f aks-helloworld.yaml --namespace dotapi
 kubectl apply -f ingress-demo.yaml --namespace dotapi	
@@ -93,14 +108,3 @@ kubectl apply -f hello-world-ingress.yaml
 curl -v -k --resolve demo.azure.com:443:52.224.145.250 https://demo.azure.com
 
 curl -v -k --resolve demo.azure.com:443:52.224.145.250 https://demo.azure.com/hello-world-two
-
-###==Run only one demo application==##
-
-#Run demo application 
-kubectl apply -f aks-helloworld.yaml --namespace dotapi
-
-# Create an ingress route for one demo application
-kubectl apply -f hello-world-ingress-1.yaml --namespace dotapi
-
-# Test the ingress configuration
-curl -v -k --resolve demo.azure.com:443:52.224.145.250 https://demo.azure.com
