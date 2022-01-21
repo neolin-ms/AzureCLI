@@ -84,12 +84,17 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -out aks-ingress-tls.crt \
     -keyout aks-ingress-tls.key \
     -subj "/CN=demo.azure.com/O=aks-ingress-tls"
-	kubectl create secret tls aks-ingress-tls \
+
+kubectl create secret tls aks-ingress-tls \
     --key aks-ingress-tls.key \
     --cert aks-ingress-tls.crt
+
 kubectl get secrets
+
 curl https://raw.githubusercontent.com/Azure/application-gateway-kubernetes-ingress/master/docs/examples/aspnetapp.yaml
+
 mv aspnetapp.yaml aspnetapptls.yaml
+
 vi aspnetapptls.yaml
 >> metadata:
 >>   name: aspnetapp
