@@ -1,4 +1,9 @@
 
+# Prerequisites
+docker run -it sturrent/aks-cm-l200lab:latest
+
+aks-cm-l200lab -h
+
 # lab1
 aks-cm-l200lab -g aks-cm-lab1-rg -n aks-lab1 -l 1
 
