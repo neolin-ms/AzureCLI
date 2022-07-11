@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 #References
 ## Tutorial: Create an Azure Red Hat OpenShift 4 cluster
