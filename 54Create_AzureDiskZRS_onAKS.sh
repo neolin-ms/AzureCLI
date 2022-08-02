@@ -6,6 +6,7 @@
 ## https://github.com/Azure/AKS/issues/2659
 ## https://github.com/kubernetes-sigs/azuredisk-csi-driver/tree/master/deploy/example/topology#zrs-disk-support
 ## https://docs.microsoft.com/en-us/azure/aks/azure-disks-dynamic-pv
+## https://github.com/clarenceb/aks-zrs-demo
 
 # Create an AKS cluster across availability zones
 az group create --name myResourceGroup --location  WestUS2
