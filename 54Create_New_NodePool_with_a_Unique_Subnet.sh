@@ -90,7 +90,7 @@ kubectl run -it --rm aks-test --image=mcr.microsoft.com/dotnet/runtime-deps:6.0 
 kubectl run -it --rm aks-test --image=mcr.microsoft.com/dotnet/runtime-deps:6.0 --overrides='{"spec": { "nodeSelector": {"kubernetes.io/hostname": "aks-linuxnode-35904113-vmss000000"}}}'
 kubectl run -it --rm aks-test2 --image=mcr.microsoft.com/dotnet/runtime-deps:6.0 --overrides='{"spec": { "nodeSelector": {"kubernetes.io/hostname": "aks-linuxnode2-12236410-vmss000001"}}}'
 
-apt-get update && apt-get install nmap -y && apt-get install iputils-ping -y && apt install iproute2 -y && apt install curl -y
+apt-get update && apt-get install nmap -y && apt-get install iputils-ping -y && apt install iproute2 -y && apt install curl -y && apt-get install dnsutils -y
 
 ping -c 3 172.23.44.29
 nmap -sS -p 80 -Pn --traceroute 172.23.44.29
