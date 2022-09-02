@@ -3,14 +3,20 @@
 ## Lisk the AKS resources
 az aks list -o table
 
-## Show the VMSS name of AKS
+## Get the Resource Group name of node pool
 rgName=myResourceGroup
 aksName=myAKSCluster
 
-az aks show -g ${rgName} -n ${aksName} -o tsv --query nodeResourceGroup
+az aks show -g ${rgName} -n ${aksName} --query nodeResourceGroup -o tsv
+
+## Get the VMSS name
+az vmss list -o table
 
 ## Show the instance-ids of node of AKS  
 kubectl get nodes -o wide
+
+## Get the instance Id of VMSS
+az vmss list-instances -g MC_neoResourceGroup_neoAKSCluster_eastasia -n aks-nodepool1-28706398-vmss
 
 ## Restart a node in VMSS of AKS
 vmssRGname=MC_myResourceGroup_myAKSCluster_eastus
