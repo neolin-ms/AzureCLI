@@ -1,5 +1,6 @@
 #!/bin/bash
 # https://learn.microsoft.com/en-us/azure/application-gateway/tutorial-ingress-controller-add-on-existing
+# https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-nginx-tls#generate-a-tls-certificate
 # https://azure.github.io/application-gateway-kubernetes-ingress/tutorials/tutorial.e2e-ssl/
 
 az group create --name neoResourceGroup --location eastus
