@@ -25,7 +25,7 @@ docker push acr221108.azurecr.io/aci-tutorial-app:v1
 
 az acr repository list --name acr221108 --output table
 
-## 2. Create a AKS cluster with ACR
+## 2. Create an AKS cluster with ACR
 az aks create \
     --resource-group testResourceGroup \
     --name testAKSCluster \
