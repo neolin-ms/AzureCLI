@@ -12,7 +12,7 @@
 ## Test the connection
 ## https://github.com/fullstorydev/grpcurl
 
-## Create ACR
+## 1. Create ACR
 az group create --name testResourceGroup --location eastasia
 
 az acr create --resource-group testResourceGroup --name acr221108 --sku Basic
@@ -25,7 +25,7 @@ docker push acr221108.azurecr.io/aci-tutorial-app:v1
 
 az acr repository list --name acr221108 --output table
 
-## Create a AKS cluster with ACR
+## 2. Create a AKS cluster with ACR
 az aks create \
     --resource-group testResourceGroup \
     --name testAKSCluster \
@@ -35,7 +35,7 @@ az aks create \
 
 az aks get-credentials --resource-group testResourceGroup --name testAKSCluster
 
-## Create NGINX Ingress Controller on AKS cluster
+## 3. Create NGINX Ingress Controller on AKS cluster
 REGISTRY_NAME=acr221108
 SOURCE_REGISTRY=k8s.gcr.io
 CONTROLLER_IMAGE=ingress-nginx/controller
@@ -77,7 +77,7 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
 
 kubectl get pod,svc,ingress -n ingress-basic
 
-## Create a gRPC service by Ingress Controller
+## 4. Create a gRPC service by Ingress Controller
 
 ### Step 1.1 Apply for an SSL certificate
 vi /tmp/openssl.cnf
@@ -101,6 +101,6 @@ kubectl get pod,svc,ingress -n ingress-basic
 ### Step 3. Create an Ingress route rule
 kubectl apply -f grpc-ingress.yaml -n ingress-basic
 
-## Test the connection
+## 5. Test the connection
 docker pull fullstorydev/grpcurl:latest
 docker run fullstorydev/grpcurl -insecure -authority grpc.example.com 20.24.115.83:443 list
