@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ## https://docs.microsoft.com/en-us/azure/aks/ingress-basic
+## https://fabianlee.org/2021/04/14/kubernetes-detecting-the-installed-version-of-nginx-ingress/
 
 # 0 Before you bgin
 ## 0.1 Helm3
@@ -90,3 +91,16 @@ kubectl delete -f aks-helloworld-two.yaml --namespace ingress-basic
 kubectl delete -f hello-world-ingress.yaml
 
 kubectl delete namespace ingress-basic
+
+# 7.1 Detecting the installed version of nginx ingress
+
+## namespace of your nginx ingress
+ingress_ns="ingress-nginx"
+
+## find running pod
+podname=$(kubectl get pods -n $ingress_ns -l app.kubernetes.io/name=ingress-nginx --field-selector=status.phase==Running -o jsonpath='{.items[0].metadata.name}')
+
+echo "pod name: $podname"
+
+$# invoke controller with version flag
+kubectl exec -it -n $ingress_ns $podname -- /nginx-ingress-controller --version
