@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #  AZURE ACTIVE DIRECTORY POD IDENTITY FOR KUBERNETES - Standard Walkthrough
 # https://azure.github.io/aad-pod-identity/docs/demo/standard_walkthrough/
 

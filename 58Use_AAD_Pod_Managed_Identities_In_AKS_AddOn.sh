@@ -1,4 +1,6 @@
-e Azure Active Directory pod-managed identities in Azure Kubernetes Service (Preview)
+#!/bin/bash
+
+# Azure Active Directory pod-managed identities in Azure Kubernetes Service (Preview)
 # https://docs.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity
 
 # Register the EnablePodIdentityPreview
