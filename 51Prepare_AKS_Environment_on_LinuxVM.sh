@@ -48,6 +48,10 @@ sudo apt-get install helm
 # Connect to the cluster (https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#connect-to-the-cluster)
 az aks install-cli
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+
+# (Optioal)Load bash completion file in bash of debian
+source /etc/bash_completion.d/azure-cli
+
 kubectl get nodes
 
 # Confirm AKS cluster is using managed identity (https://docs.microsoft.com/en-us/azure/aks/use-managed-identity)
