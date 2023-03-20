@@ -11,6 +11,7 @@
 ## https://help.aliyun.com/document_detail/313328.html
 ## Test the connection
 ## https://github.com/fullstorydev/grpcurl
+## test
 
 ## 1. Create ACR
 az group create --name testResourceGroup --location eastasia
