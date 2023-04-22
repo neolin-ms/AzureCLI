@@ -7,8 +7,10 @@
 ## https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
 ## Create an ingress controller in Azure Kubernetes Service (AKS)
 ## https://learn.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli
-## Create a gRPC service by Ingress Controller
-## https://help.aliyun.com/document_detail/313328.html
+## kubernetes/ingress-nsing - gRPC
+## https://kubernetes.github.io/ingress-nginx/examples/grpc/
+## Create TLS certificate
+## https://github.com/MicrosoftDocs/azure-docs.zh-tw/blob/master/articles/aks/ingress-own-tls.md
 ## Test the connection
 ## https://github.com/fullstorydev/grpcurl
 ## test
@@ -86,27 +88,27 @@ kubectl get pod,svc,ingress -n ingress-basic
 
 ## 4. Create a gRPC service by Ingress Controller
 
-### Step 1.1 Apply for an SSL certificate
-vi /tmp/openssl.cnf
+### Step 4.1 Create a TLS certificate
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -out aks-ingress-tls.crt \
+    -keyout aks-ingress-tls.key \
+    -subj "/CN=demo.azure.com/O=aks-ingress-tls" \
+    -addext "subjectAltName = DNS:demo.azure.com"
 
-### Step 1.2 Execute the following command to sign the certificate request
-openssl req -new -nodes -keyout grpc.key -out grpc.csr -config /tmp/openssl.cnf -subj "/C=CN/ST=Zhejiang/L=Hangzhou/O=AlibabaCloud/OU=ContainerService/CN=grpc.example.com"
+### Step 4.2 Create a scret on kubernetes for TLS certificate
+kubectl create secret tls aks-ingress-tls \
+    --namespace ingress-basic \
+    --key aks-ingress-tls.key \
+    --cert aks-ingress-tls.crt
 
-### Step 1.3 Execute the following command to sign the certificate
-openssl x509 -req -days 3650 -in grpc.csr -signkey grpc.key -out grpc.crt -extensions v3_req -extfile /tmp/openssl.cnf
+### Step 4.3 Creae pod and service for gRPC service
+kubectl apply -f https://raw.githubusercontent.com/neolin-ms/example_Ingress_Nginx_gRPC/main/go-grpc-greeter-server_Pod_Service.yaml -n ingress-basic
 
-### Step 1.4 Execute the following command to add the TLS Secret named grpc-secret to the cluster
-kubectl create secret tls grpc-secret --key grpc.key --cert grpc.crt -n ingress-basic
-kubectl get secret -n ingress-basic
+### Step 4.4 Check the pod, svc, ingress
+kubectl apply -f https://raw.githubusercontent.com/neolin-ms/example_Ingress_Nginx_gRPC/main/go-grpc-greeter-server_Ingress_Route.yaml -n ingress-basic
 
-### Step 2.1 Resources required to create a gRPC service
-kubectl apply -f grpc-service.yaml -n ingress-basic
-
-### Step 2.2 Check the pod, svc, ingress
+## Step 4.5 Check the pod/service/ingress of gRPC service
 kubectl get pod,svc,ingress -n ingress-basic
-
-### Step 3. Create an Ingress route rule
-kubectl apply -f grpc-ingress.yaml -n ingress-basic
 
 ## 5. Test the connection
 docker pull fullstorydev/grpcurl:latest
