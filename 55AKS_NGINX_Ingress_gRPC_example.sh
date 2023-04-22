@@ -49,7 +49,7 @@ az aks get-credentials --resource-group testResourceGroup --name testAKSCluster
 
 ## 3. Create NGINX Ingress Controller on AKS cluster
 REGISTRY_NAME=myacr0308
-SOURCE_REGISTRY=k8s.gcr.io
+SOURCE_REGISTRY=registry.k8s.io
 CONTROLLER_IMAGE=ingress-nginx/controller
 CONTROLLER_TAG=v1.2.1
 PATCH_IMAGE=ingress-nginx/kube-webhook-certgen
@@ -62,13 +62,13 @@ az acr import --name $REGISTRY_NAME --source $SOURCE_REGISTRY/$PATCH_IMAGE:$PATC
 az acr import --name $REGISTRY_NAME --source $SOURCE_REGISTRY/$DEFAULTBACKEND_IMAGE:$DEFAULTBACKEND_TAG --image $DEFAULTBACKEND_IMAGE:$DEFAULTBACKEND_TAG
 
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
 ACR_URL="myacr0308.azurecr.io"
 
-helm install nginx-ingress ingress-nginx/ingress-nginx \
+helm install ingress-nginx ingress-nginx/ingress-nginx \
     --version 4.1.3 \
     --namespace ingress-basic \
     --create-namespace \
-    --set controller.ingressClassResource.name=nginx-ingress \
     --set controller.replicaCount=2 \
     --set controller.nodeSelector."kubernetes\.io/os"=linux \
     --set controller.image.registry=$ACR_URL \
@@ -87,7 +87,7 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set defaultBackend.image.tag=$DEFAULTBACKEND_TAG \
     --set defaultBackend.image.digest=""
 
-kubectl get pod,svc,ingress -n ingress-basic
+kubectl get pods,svc,ingress -n ingress-basic
 
 ## 4. Create a gRPC service by Ingress Controller
 
@@ -119,7 +119,10 @@ apt-get update -y
 apt-get install dnsutils -y
 apt-get install curl -y
 apt-get install netcat -y
+apt install vim -y
 curl -sSL "https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_x86_64.tar.gz" | sudo tar -xz -C /usr/local/bin
 grpcurl -h
 
-
+kubectl cp aks-ingress-tls.crt default/aks-ssh:/tmp/.
+cp aks-ingress-tls.crt /usr/local/share/ca-certificates/.
+update-ca-certificates
