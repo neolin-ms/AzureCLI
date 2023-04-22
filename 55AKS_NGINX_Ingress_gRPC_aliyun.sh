@@ -16,28 +16,34 @@
 ## 1. Create ACR
 az group create --name testResourceGroup --location eastasia
 
-az acr create --resource-group testResourceGroup --name acr221108 --sku Basic
+az acr create --resource-group testResourceGroup --name myacr0308 --sku Basic
 
-az acr login --name acr221108
+az acr login --name myacr0308
 
-docker tag myacr0621.azurecr.io/aci-tutorial-app:v1 acr221108.azurecr.io/aci-tutorial-app:v1
+## 2. Build a gRPC service by Dockerfile and push to ACR
 
-docker push acr221108.azurecr.io/aci-tutorial-app:v1
+curl https://raw.githubusercontent.com/neolin-ms/example_Ingress_Nginx_gRPC/main/Dockerfile
 
-az acr repository list --name acr221108 --output table
+docker build -t go-grpc-greeter-server:1.0.0 .
 
-## 2. Create an AKS cluster with ACR
+docker tag go-grpc-greeter-server:1.0.0 myacr0308.azurecr.io/go-grpc-greeter-server:1.0.0
+
+docker push myacr0308.azurecr.io/go-grpc-greeter-server:1.0.0
+
+az acr repository list --name myacr0308 --output table
+
+## 3. Create an AKS cluster with ACR
 az aks create \
     --resource-group testResourceGroup \
     --name testAKSCluster \
-    --node-count 3 \
+    --node-count 2 \
     --generate-ssh-keys \
-    --attach-acr acr221108
+    --attach-acr myacr0308
 
 az aks get-credentials --resource-group testResourceGroup --name testAKSCluster
 
 ## 3. Create NGINX Ingress Controller on AKS cluster
-REGISTRY_NAME=acr221108
+REGISTRY_NAME=myacr0308
 SOURCE_REGISTRY=k8s.gcr.io
 CONTROLLER_IMAGE=ingress-nginx/controller
 CONTROLLER_TAG=v1.2.1
@@ -51,7 +57,7 @@ az acr import --name $REGISTRY_NAME --source $SOURCE_REGISTRY/$PATCH_IMAGE:$PATC
 az acr import --name $REGISTRY_NAME --source $SOURCE_REGISTRY/$DEFAULTBACKEND_IMAGE:$DEFAULTBACKEND_TAG --image $DEFAULTBACKEND_IMAGE:$DEFAULTBACKEND_TAG
 
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-ACR_URL="acr221108.azurecr.io"
+ACR_URL="myacr0308.azurecr.io"
 
 helm install nginx-ingress ingress-nginx/ingress-nginx \
     --version 4.1.3 \
