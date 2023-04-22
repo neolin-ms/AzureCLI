@@ -11,9 +11,12 @@
 ## https://kubernetes.github.io/ingress-nginx/examples/grpc/
 ## Create TLS certificate
 ## https://github.com/MicrosoftDocs/azure-docs.zh-tw/blob/master/articles/aks/ingress-own-tls.md
+## Can't connect to pods and service in same cluster
+## https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/troubleshoot-connection-pods-services-same-cluster
 ## Test the connection
 ## https://github.com/fullstorydev/grpcurl
-## test
+## How to install the grpcurl binary on Linux?
+## https://github.com/fullstorydev/grpcurl/issues/154
 
 ## 1. Create ACR
 az group create --name testResourceGroup --location eastasia
@@ -111,5 +114,12 @@ kubectl apply -f https://raw.githubusercontent.com/neolin-ms/example_Ingress_Ngi
 kubectl get pod,svc,ingress -n ingress-basic
 
 ## 5. Test the connection
-docker pull fullstorydev/grpcurl:latest
-docker run fullstorydev/grpcurl -insecure -authority grpc.example.com 20.24.115.83:443 list
+kubectl run -it aks-ssh --namespace ingress-basic --image=debian:stable
+apt-get update -y
+apt-get install dnsutils -y
+apt-get install curl -y
+apt-get install netcat -y
+curl -sSL "https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_x86_64.tar.gz" | sudo tar -xz -C /usr/local/bin
+grpcurl -h
+
+
