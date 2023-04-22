@@ -93,16 +93,16 @@ kubectl get pods,svc,ingress -n ingress-basic
 
 ### Step 4.1 Create a TLS certificate
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -out aks-ingress-tls.crt \
-    -keyout aks-ingress-tls.key \
-    -subj "/CN=demo.azure.com/O=aks-ingress-tls" \
+    -out aks-grpc-tls.crt \
+    -keyout aks-grpc-tls.key \
+    -subj "/CN=demo.azure.com/O=aks-grpc-tls" \
     -addext "subjectAltName = DNS:demo.azure.com"
 
 ### Step 4.2 Create a scret on kubernetes for TLS certificate
-kubectl create secret tls aks-ingress-tls \
+kubectl create secret tls aks-grpc-tls \
     --namespace ingress-basic \
-    --key aks-ingress-tls.key \
-    --cert aks-ingress-tls.crt
+    --key aks-grpc-tls.key \
+    --cert aks-grpc-tls.crt
 
 ### Step 4.3 Creae pod and service for gRPC service
 kubectl apply -f https://raw.githubusercontent.com/neolin-ms/example_Ingress_Nginx_gRPC/main/go-grpc-greeter-server_Pod_Service.yaml -n ingress-basic
