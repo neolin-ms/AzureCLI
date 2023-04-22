@@ -120,9 +120,12 @@ apt-get install dnsutils -y
 apt-get install curl -y
 apt-get install netcat -y
 apt install vim -y
+
+scp aks-ingress-tls.crt azureuser@<PUBLIC_IP>:/tmp/.
+cp aks-ingress-tls.crt /usr/local/share/ca-certificates/.
+sudo update-ca-certificates
+
 curl -sSL "https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_x86_64.tar.gz" | sudo tar -xz -C /usr/local/bin
 grpcurl -h
 
-kubectl cp aks-ingress-tls.crt default/aks-ssh:/tmp/.
-cp aks-ingress-tls.crt /usr/local/share/ca-certificates/.
-update-ca-certificates
+grpcurl demo.azure.com:443 helloworld.Greeter/SayHello
