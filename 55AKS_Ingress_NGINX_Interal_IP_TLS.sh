@@ -138,7 +138,7 @@ kubectl get pod,svc,ingress
 # Step 9: Test an internal IP address
 
 # Step 9.1: Copy certificate to client and update it to library of certificate.
-scp aks-ingress-tls.crt azureuser@20.122.187.225:/tmp/.
+scp aks-ingress-tls.crt azureuser@<PUBLIC_IP>:/tmp/.
 cp aks-ingress-tls.crt /usr/local/share/ca-certificates/.
 sudo update-ca-certificates
 
