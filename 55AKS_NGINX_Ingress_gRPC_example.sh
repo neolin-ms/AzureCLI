@@ -121,8 +121,10 @@ apt-get install curl -y
 apt-get install netcat -y
 apt install vim -y
 
-scp aks-ingress-tls.crt azureuser@<PUBLIC_IP>:/tmp/.
-cp aks-ingress-tls.crt /usr/local/share/ca-certificates/.
+kubectl cp aks-grpc-tls.crt aks-ssh:/tmp/
+
+scp aks-grpc-tls.crt azureuser@<PUBLIC_IP>:/tmp/.
+cp aks-grpc-tls.crt /usr/local/share/ca-certificates/.
 sudo update-ca-certificates
 
 curl -sSL "https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_x86_64.tar.gz" | sudo tar -xz -C /usr/local/bin
