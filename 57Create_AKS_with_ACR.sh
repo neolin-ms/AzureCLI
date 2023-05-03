@@ -18,6 +18,9 @@ az acr login --name $MYACR
 docker tag stockdata:1.0.0 myacr0503.azurecr.io/stockdata:1.0.0
 docker tag stockweb:1.0.0 myacr0503.azurecr.io/stockweb:1.0.0
 
+docker push myacr0503.azurecr.io/stockdata:1.0.0
+docker push yacr0503.azurecr.io/stockweb:1.0.0
+
 docker pull mcr.microsoft.com/hello-world
 docker pull myacr0503.azurecr.io/stockdata:1.0.0
 docker pull myacr0503.azurecr.io/stockweb:1.0.0
