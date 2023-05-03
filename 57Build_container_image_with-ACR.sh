@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 ## Automate container image builds and maintenance with ACR Tasks
 ## https://learn.microsoft.com/en-us/azure/container-registry/container-registry-tasks-overview
