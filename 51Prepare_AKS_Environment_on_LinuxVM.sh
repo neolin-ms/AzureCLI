@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# How to enable command completion for Azure CLI in zsh?
+# https://stackoverflow.com/questions/49273395/how-to-enable-command-completion-for-azure-cli-in-zsh
+
 # Install the AzureCLI on Linux - Install with one command (https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
@@ -61,3 +64,6 @@ az aks show -g StagingGroup -n planStagingCluster --query "servicePrincipalProfi
 
 # Find the control plane system-assigned identity's object ID
 az aks show -g StagingGroup -n planStagingCluster --query "identity"
+
+# Enable command completion for Azure CLI in Debian
+source /etc/bash_completion.d/azure-cli
