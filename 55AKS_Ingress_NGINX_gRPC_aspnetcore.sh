@@ -32,7 +32,7 @@
 ## https://kubernetes.io/docs/concepts/containers/images/
 
 ## 1. Create ACR
-export rgName=eastasia
+export rgName=eastasiaResourceGroup
 export locationRegion=eastasia
 az group create --name $rgName --location $locationRegion
 
