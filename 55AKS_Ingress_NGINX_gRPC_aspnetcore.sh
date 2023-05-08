@@ -21,46 +21,62 @@
 ## https://github.com/fullstorydev/grpcurl/issues/154
 
 ## 1. Create ACR
-az group create --name eastusResourceGroup --location eastus
+export rgName=eastasia
+export locationRegion=eastasia
+az group create --name $rgName --location $locationRegion
 
-az acr create --resource-group eastusResourceGroup --name myacr0503 --sku Basic
+export myACR=myacr0508
+az acr create --resource-group $RG --name $myACR --sku Basic
 
-az acr login --name myacr0503
+az acr login --name $myACR
 
 ## 2. Build a gRPC service of ASP.NET Core by Dockerfile and push to ACR
 
-mkdir asp-net-grpc-greeter && cd "$_"  
+git clone https://github.com/neolin-ms/asp-net-grpc-greeter.git
 
-dotnet new grpc -o GrpcGreeter
-code -r GrpcGreeter
-
-## Open the intergrated terminal of Virsual Studio Code
-dotnet run
-
-## Open a borwase and vavifates to http://localhost:port, such as http://localhost:7042
-
-curl https://raw.githubusercontent.com/neolin-ms/asp-net-grpc-greeter/main/Greeter/Dockerfile
-
+cd asp-net-grpc-greeter
 docker build -t greeter:1.0.0 -f ./Greeter/Dockerfile .
 docker images
-docker tag greeter:1.0.0 myacr0503.azurecr.io/greeter:1.0.0
-docker push myacr0503.azurecr.io/greeter:1.0.0
+docker tag greeter:1.0.0 $myACR.azurecr.io/greeter:1.0.0
+docker push $myACR.azurecr.io/greeter:1.0.0
 
-az acr repository list --name myacr0503 --output table
+## 2.1 Option - Create a new greeter by Vistual Stdio Core
+## mkdir asp-net-grpc-greeter && cd "$_"  
+## dotnet new grpc -o Greeter
+## code -r Greeter
+## 2.2 Option - Open the intergrated terminal of Visual Studio Code
+##  dotnet run
+## 2.3 Option - Open a borwase and vavifates to http://localhost:port, such as http://localhost:7042
+## 2.5 Option - Create a new solution file of Vistual Stdio Core
+## dotnet new sln -n Greeter
+## 2.5 Option - Copy the Dockerfile 
+## cp /Greeter
+## curl https://raw.githubusercontent.com/neolin-ms/asp-net-grpc-greeter/main/Greeter/Dockerfile
+## 2.6 Option - Build a container image of Greeter of gRPC
+## docker build -t greeter:1.0.0 -f ./Greeter/Dockerfile .
+## 2.7 Option - Push container image to ACR
+## docker images
+## docker tag greeter:1.0.0 $myACR.azurecr.io/greeter:1.0.0
+## docker push $myACR.azurecr.io/greeter:1.0.0
+
+az acr repository list --name $myACR --output table
 
 ## 3. Create an AKS cluster with ACR
+export aksName=eastasiaAKSCluster
 az aks create \
-    --resource-group eastusResourceGroup \
-    --name eastusAKSCluster \
+    --resource-group $RG \
+    --name $aksName \
     --node-count 2 \
     --generate-ssh-keys \
-    --attach-acr myacr0503
+    --attach-acr $myACR
 
-az aks get-credentials --resource-group eastusResourceGroup --name eastusAKSCluster
+az aks get-credentials --resource-group $rgName --name $aksName
+
+kubectl get nodes
 
 ## 3. Create NGINX Ingress Controller on AKS cluster
 
-NAMESPACE=ingress-basic
+export NAMESPACE=ingress-basic
 
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
@@ -75,49 +91,51 @@ kubectl get pods,svc,ingress -n ingress-basic
 ## 4. Create a gRPC service by Ingress Controller
 
 ### Step 4.1 Create a TLS certificate
+cd /asp-net-grpc-greeter/KuberneterSample
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -out aks-grpc-tls.crt \
     -keyout aks-grpc-tls.key \
     -subj "/CN=demo.azure.com/O=aks-grpc-tls" \
     -addext "subjectAltName = DNS:demo.azure.com"
 
-### Step 4.2 Create a scret on kubernetes for TLS certificate
+### Step 4.2 Creae pod and service for gRPC service
+
+cd /asp-net-grpc-greeter/KubenetersExample
+kubectl apply -f namespace.yml
+kubectl get ns
+
+vi greeter-pod-service.yml
+kubectl apply -f greeter-pod-service.yml
+
+kubectl get pods,svc -n greeter
+
+### Step 4.3 Create a scret on kubernetes for TLS certificate
 kubectl create secret tls aks-grpc-tls \
-    --namespace ingress-basic \
+    --namespace greeter \
     --key aks-grpc-tls.key \
     --cert aks-grpc-tls.crt
 
-### Step 4.3 Creae pod and service for gRPC service
-kubectl apply -f https://raw.githubusercontent.com/neolin-ms/asp-net-grpc-greeter/main/KubernetesSample/namespace.yml
-kubectl get ns
+### Step 4.4 Deploy a ingress for gRPC service of greeter
+kubectl apply -f greeter-ingress.yml -n greeter
 
-kubectl apply -f https://raw.githubusercontent.com/neolin-ms/asp-net-grpc-greeter/main/KubernetesSample/greeter-pod-service.yml
-
-kubectl apply -f https://raw.githubusercontent.com/neolin-ms/asp-net-grpc-greeter/main/KubernetesSample/greeter-ingress.yml -n greeter
-
-### Step 4.4 Check the pod, svc, ingress
+### Step 4.5 Check the pod, svc, ingress
 kubectl get pods,svc,ingress -n greeter
 kubectl describe ingress greeter-ingress -n greeter
 
-## Step 4.5 Check the pod/service/ingress of gRPC service
-kubectl get pod,svc,ingress -n ingress-basic
-
 ## 5. Test the connection
-kubectl run -it aks-ssh --namespace ingress-basic --image=debian:stable
+cd /asp-net-grpc-greeter/Greeter/Protos
+scp greet.proto azureuser@<PUBLIC_IP>:~/.
+cd /asp-net-grpc-greeter/KuberneterSample
+scp aks-grpc-tls.crt azureuser@<PUBLIC_IP>:/tmp/.
+ssh azureuser@<PUBLIC_IP>
+sudo cp /tmp/aks-grpc-tls.crt /usr/local/share/ca-certificates/.
+sudo update-ca-certificates
+
 apt-get update -y
 apt-get install dnsutils -y
 apt-get install curl -y
 apt-get install netcat -y
 apt install vim -y
-
-kubectl cp aks-grpc-tls.crt aks-ssh:/tmp/
-
-scp aks-grpc-tls.crt azureuser@<PUBLIC_IP>:/tmp/.
-cp aks-grpc-tls.crt /usr/local/share/ca-certificates/.
-sudo update-ca-certificates
-
-cd /asp-net-grpc-greeter/Greeter/Protos
-scp greet.proto azureuser@<PUBLIC_IP>:~/.
 
 sudo /etc/hosts
 <PUBLIC_IP> demo.azure.com
