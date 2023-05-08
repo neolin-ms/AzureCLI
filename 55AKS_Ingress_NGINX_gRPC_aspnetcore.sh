@@ -19,6 +19,17 @@
 ## https://github.com/fullstorydev/grpcurl
 ## How to install the grpcurl binary on Linux?
 ## https://github.com/fullstorydev/grpcurl/issues/154
+## https://learn.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/docker
+## https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-7.0&tabs=visual-studio-code
+## https://github.com/dotnet-architecture/grpc-for-wcf-developers/tree/main/KubernetesSample
+## https://learn.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/docker
+## https://learn.microsoft.com/en-us/dotnet/core/tools/sdk-errors/netsdk1064
+## https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-sln
+## https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-7.0&tabs=visual-studio-code
+## https://stackoverflow.com/questions/61167032/error-netsdk1064-package-dnsclient-1-2-0-was-not-found
+## https://github.com/dotnet/dotnet-docker/blob/main/samples/dotnetapp/.dockerignore
+## https://github.com/caddyserver/caddy/issues/3236
+## https://kubernetes.io/docs/concepts/containers/images/
 
 ## 1. Create ACR
 export rgName=eastasia
