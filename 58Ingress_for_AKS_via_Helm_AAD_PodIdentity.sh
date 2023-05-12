@@ -168,4 +168,6 @@ spec:
           pathType: Exact
 EOF		  
 
-kubectl get pod,svc,ingress
+kubectl get pod,svc,ingress 
+
+curl -L http://<PUBLIC_IP>
