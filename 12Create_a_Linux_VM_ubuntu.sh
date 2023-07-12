@@ -10,8 +10,8 @@ az group create --name testUbuntuRg --location eastasia
 # Create virtual machine
 az vm create \
     --resource-group testUbuntuRg \
-    --name myUbuntu1804vm1230 \
-    --image Canonical:UbuntuServer:18.04-LTS:18.04.202107200 \
+    --name myUbuntu2204vm0518 \
+    --image Ubuntu2204 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys
