@@ -10,7 +10,7 @@ az group create --name testUbuntuRg --location eastasia
 # Create virtual machine
 az vm create \
     --resource-group testUbuntuRg \
-    --name myUbuntu2204vm0518 \
+    --name myUbuntu2204vm0806 \
     --image Ubuntu2204 \
     --size Standard_D4s_v3 \
     --admin-username azureuser \

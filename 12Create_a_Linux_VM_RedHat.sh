@@ -11,7 +11,7 @@ az group create --name testRedHatRg --location southeastasia
 az vm create \
     --resource-group testRedHatRg \
     --name testRedHat77raw0125 \
-    --image RedHat:RHEL:7-RAW:7.7.2019090418 \
+    --image RedHat:RHEL:8.2:latest \
     --size Standard_D4s_v3 \
     --admin-username azureuser \
     --generate-ssh-keys

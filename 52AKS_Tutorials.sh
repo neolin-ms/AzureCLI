@@ -8,6 +8,7 @@
 ## 5 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-scale?tabs=azure-cli
 ## 6 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-app-update?tabs=azure-cli
 ## 7 - https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-upgrade-cluster?tabs=azure-cli
+## 8 - https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/troubleshoot-connection-pods-services-same-cluster 
 
 # 1.1 Get application code
 git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
@@ -171,3 +172,18 @@ az aks show --resource-group ${rgName} --name ${aksName} --output table
 
 # 7.4 Delete the cluster
 az group delete --name ${rgName} --yes --no-wait
+
+# 8.1 Set up the test pod and remote server port
+
+kubectl run -it --rm aks-ssh --namespace <namespace> --image=debian:stable
+kubectl run -it aks-ssh --namespace <namespace> --image=debian:stable
+kubectl run -it aks-ssh --image=debian:stable  --overrides='{"spec": { "nodeSelector": {"kubernetes.io/hostname": "aks-nodepool1-291^C518-vmss000001"}}}'
+
+apt-get update -y
+apt-get install dnsutils -y
+apt-get install curl -y
+apt-get install netcat -y
+
+curl -Iv http://<pod-ip-address>:<port>
+
+nc -z -v <endpoint> <port>
